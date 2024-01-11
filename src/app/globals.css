@@ -20,13 +20,14 @@ footer {
   color: theme('colors.fade-black-400')
 }
 
+footer a, .sidebar a {
+  transition: all 120ms ease-in-out;
+}
+
 footer a:hover {
   color: theme('colors.white');
 }
 
-.sidebar a {
-  color: theme('colors.fade-white-400')
-}
 .sidebar a:hover {
   color: theme('colors.white');
 }

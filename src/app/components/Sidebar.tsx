@@ -13,10 +13,12 @@ const Sidebar = () => {
         </p>
       </div>
 
-      <div className='flex-1 flex-col flex items-center pl-4 pr-4'>
-        <ul>
-          <li><Link href='/'>- 🛖 Home</Link></li>
-          <li><Link href='/page/BinToDec'>- 🔣 Binatry Decimal Translator</Link></li>
+      <div className='flex-1 flex-col flex items-center p-0 text-fade-white-400'>
+        <ul className='w-full'>
+          <li className='pl-4 pr-2'><Link href='/'>🛖 Home</Link></li>
+          <hr className='relative w-full mt-4 mb-4 border-fade-black-100'></hr>
+          <p className='m-4 text-sm uppercase'>Level 1 - beginner</p>
+          <li className='pl-4 pr-2'><Link href='/page/BinToDec'>🔣 Bin 2 Dec</Link></li>
         </ul>
       </div>
     </div>
