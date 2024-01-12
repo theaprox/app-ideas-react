@@ -2,12 +2,12 @@ import React from 'react'
 
 const BinToDec = () => {
   return (
-    <div className='flex-1 frow flex flex-col justify-center'>
-      <h1 className='flex-none flex justify-center antialiased text-4xl font-black uppercase p-4'>
+    <div className='tw-flex-1 tw-frow tw-flex tw-flex-col tw-justify-center'>
+      <h1 className='tw-flex-none tw-flex tw-justify-center tw-text-4xl tw-font-black tw-uppercase tw-p-4'>
         Binary to Decimal
       </h1>
-      <div className='flex-1 flex flex-col items-center p-4'>
-        <div className='flex flex-col'>
+      <div className='tw-flex-1 tw-flex tw-flex-col tw-items-center tw-p-4'>
+        <div className='tw-flex tw-flex-col'>
           <input type='text' className='' placeholder='binary'></input>
         </div>
       </div>

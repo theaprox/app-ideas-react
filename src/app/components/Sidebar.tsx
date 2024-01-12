@@ -6,22 +6,22 @@ const Sidebar = () => {
   return (
     <>
     
-      <div className='flex-1 grow hidden md:flex flex-col bg-black w-64 sidebar'>
+      <div className='tw-flex-1 tw-grow tw-hidden md:tw-flex tw-flex-col tw-bg-black tw-w-64 sidebar'>
 
-        <div className='flex-none flex-col pb-8'>
-          <h1 className='flex-none flex text-md uppercase antialiased font-black tracking-wide justify-center items-center h-20'>Project List</h1>
-          <p className='flex-1 flex flex-col items-center text-fade-black-400'>
+        <div className='tw-flex-none tw-flex-col tw-pb-8'>
+          <h1 className='tw-flex-none tw-flex tw-text-md tw-uppercase tw-font-black tw-tracking-wide tw-justify-center tw-items-center tw-h-20'>Project List</h1>
+          <p className='tw-flex-1 tw-flex tw-flex-col tw-items-center tw-text-fade-black-400'>
               Link tree to all projects
-              <span className='text-fade-black-100 font-black text-3xl'>WIP</span>
+              <span className='tw-text-fade-black-100 tw-font-black tw-text-3xl'>WIP</span>
           </p>
         </div>
 
-        <div className='flex-1 flex-col flex items-center p-0 text-fade-white-400'>
-          <ul className='w-full'>
-            <li className='pl-4 pr-2'><Link href='/'>🛖 Home</Link></li>
-            <hr className='relative w-full mt-4 mb-4 border-fade-black-100'></hr>
-            <p className='m-4 text-sm uppercase'>Level 1 - beginner</p>
-            <li className='pl-4 pr-2'><Link href='/page/BinToDec'>🔣 Bin 2 Dec</Link></li>
+        <div className='tw-flex-1 tw-flex-col tw-flex tw-items-center tw-p-0'>
+          <ul className='tw-w-full'>
+            <li className='tw-pl-4 tw-pr-2'><Link href='/'>🛖 Home</Link></li>
+            <hr className='tw-relative tw-w-full tw-mt-4 tw-mb-4 tw-border-fade-black-100'></hr>
+            <p className='tw-m-4 tw-text-sm tw-uppercase'>Level 1 - beginner</p>
+            <li className='tw-pl-4 tw-pr-2'><Link href='/page/BinToDec'>🔣 Bin 2 Dec</Link></li>
           </ul>
         </div>
 

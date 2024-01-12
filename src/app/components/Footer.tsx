@@ -6,25 +6,25 @@ import SvgYoutube from './icons/Youtube';
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col items-center p-10 text-base-grey'>
+    <footer className='tw-flex tw-flex-col tw-items-center tw-p-10'>
 
-      <nav className='flex flex-col items-center font-semibold gap-3'>
-          <span className='flex-1 flex flex-col gap-0 text-center md:flex-row md:gap-6'>
-            <a className='p-1'>Terms of Service</a>
-            <a className='p-1'>Privacy policy</a>
-            <a className='p-1'>Contact Us</a>
-            <a className='p-1'>Cookie policy</a>
+      <nav className='tw-flex tw-flex-col tw-items-center tw-font-semibold tw-gap-3'>
+          <span className='tw-flex-1 tw-flex tw-flex-col tw-gap-0 tw-text-center md:tw-flex-row md:tw-gap-6'>
+            <a className='tw-p-1'>Terms of Service</a>
+            <a className='tw-p-1'>Privacy policy</a>
+            <a className='tw-p-1'>Contact Us</a>
+            <a className='tw-p-1'>Cookie policy</a>
           </span>
           <span>
-            <a className='p-1 font-light'>Update cookie preferences</a>
+            <a className='tw-p-1 tw-font-light'>Update cookie preferences</a>
           </span>
       </nav>
 
-      <div className='flex flex-row gap-0 pt-6 pb-6 text-2xl justify-center align-middle'>
-          <a href='/' className='py-1 px-8 flex items-center'><SvgDiscord /></a>
-          <a href='/' className='py-1 px-8 flex items-center'><SvgXTwitter /></a>
-          <a href='/' className='py-1 px-8 flex items-center'><SvgTwitch /></a>
-          <a href='/' className='py-1 px-8 flex items-center'><SvgYoutube /></a>
+      <div className='tw-flex tw-flex-row tw-gap-0 tw-pt-6 tw-pb-6 tw-text-2xl tw-justify-center tw-align-middle'>
+          <a href='/' className='tw-py-1 tw-px-8 tw-flex tw-items-center'><SvgDiscord /></a>
+          <a href='/' className='tw-py-1 tw-px-8 tw-flex tw-items-center'><SvgXTwitter /></a>
+          <a href='/' className='tw-py-1 tw-px-8 tw-flex tw-items-center'><SvgTwitch /></a>
+          <a href='/' className='tw-py-1 tw-px-8 tw-flex tw-items-center'><SvgYoutube /></a>
       </div>
 
       <aside>

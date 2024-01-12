@@ -19,14 +19,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='flex flex-row flex-1 grow min-h-screen'>
+        <div className='tw-flex tw-flex-row tw-flex-1 tw-grow tw-min-h-screen tw-antialiased'>
 
-          <div className='flex-none flex flex-col'>
+          <div className='tw-flex-none tw-flex tw-flex-col'>
             <Sidebar />
           </div>
 
-          <div className='flex-1 flex flex-col gap-0'>
-            <main className='flex-1 grow flex'>
+          <div className='tw-flex-1 tw-flex tw-flex-col tw-gap-0'>
+            <main className='tw-flex-1 tw-grow tw-flex'>
               {children}
             </main>
             <Footer />

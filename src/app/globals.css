@@ -21,6 +21,7 @@ footer {
 }
 
 footer a, .sidebar a {
+  color: theme('colors.fade-black-400'); 
   transition: all 120ms ease-in-out;
 }
 
