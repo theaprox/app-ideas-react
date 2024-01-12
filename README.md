@@ -1,3 +1,6 @@
+# Practice projects from 'app-ideas'
+
+Projects challange from [app-ideas](https://github.com/florinpop17/app-ideas) built in next.js react framework with tailwind css and typescript.
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
