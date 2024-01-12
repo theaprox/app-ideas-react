@@ -27,10 +27,6 @@ const Sidebar = () => {
 
       </div>
 
-      <div className='flex flex-1 flex-col md:hidden'>
-        small sidebar
-      </div>
-
     </>
   )
 }

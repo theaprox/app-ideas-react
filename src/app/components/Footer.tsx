@@ -20,7 +20,7 @@ const Footer = () => {
           </span>
       </nav>
 
-      <div className='flex flex-row gap-0 p-6 text-2xl justify-center align-middle'>
+      <div className='flex flex-row gap-0 pt-6 pb-6 text-2xl justify-center align-middle'>
           <a href='/' className='py-1 px-8 flex items-center'><SvgDiscord /></a>
           <a href='/' className='py-1 px-8 flex items-center'><SvgXTwitter /></a>
           <a href='/' className='py-1 px-8 flex items-center'><SvgTwitch /></a>

@@ -27,6 +27,16 @@ const config: Config = {
         "fade-black-400": "#505055",
         "fade-black-500": "#606065",
       },
+      screens: {
+        'xs': '400px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+        '3xl': '1680px',
+        '4xl': '2200px',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
