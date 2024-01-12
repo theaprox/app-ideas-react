@@ -11,10 +11,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
+import Collapse from '@mui/material/Collapse';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
-import { IconButton } from '@mui/material';
+import { IconButton, Link, ListItemSecondaryAction, ListSubheader } from '@mui/material';
+import { SIDEBAR } from '../constants';
 
 const Sidebar = () => {
   const [state, setState] = React.useState({
@@ -22,6 +26,7 @@ const Sidebar = () => {
     left: false,
     bottom: false,
     right: false,
+    open: true,
   });
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
@@ -43,28 +48,32 @@ const Sidebar = () => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
       <List>
-        {['Home'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        <ListSubheader component="div" id="nested-list-subheader" color='inherit' sx={{ background: 'none' }} >
+            Navigation
+        </ListSubheader>
+        {SIDEBAR.map((item) => (
+                (() => {
+                  switch (item.key) {
+                    case 'divider': return(
+                      <Divider />
+                    )
+                    default: return(
+                      <ListItem key={item.key} disablePadding>
+                        <ListItemButton component="a" href={item.path}>
+                          <ListItemIcon>
+                          {(() => {
+                            switch (item.key) {
+                              case 'home': return <HomeIcon />
+                              default: return null
+                            }
+                          })()}
+                          </ListItemIcon>
+                          <ListItemText primary={item.label} />
+                        </ListItemButton>
+                      </ListItem>
+                    )
+                  }
+                })(),
         ))}
       </List>
     </Box>
