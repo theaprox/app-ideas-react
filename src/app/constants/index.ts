@@ -1,10 +1,13 @@
 // Handle Font AWesome Icons for export
 
+import { Label } from "@mui/icons-material";
+
 
 // SIDEBAR COMPONENT DATA
 interface SidebarItems {
     key: string;
     label: string;
+    level?: string;
     path?: string;
     icon?: string;
     faicon?: string;
@@ -21,9 +24,16 @@ interface SidebarItems {
         icon: 'HomeIcon',
     },
     {
-        key: 'bin2dec',
-        label: 'Binary to Decimal',
-        path: '/page/BinToDec'
+        key: 'level',
+        level: '1',
+        label: 'Level - Beginner',
+        subitems:[
+            {
+                key: 'bin2dec',
+                label: 'Binary to Decilam',
+                path: '/page/BinToDec'
+            }
+        ]
     }
     // More items...
   ];
