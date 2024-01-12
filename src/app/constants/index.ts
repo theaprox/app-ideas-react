@@ -21,10 +21,6 @@ interface SidebarItems {
         icon: 'HomeIcon',
     },
     {
-        key: 'divider',
-        label: 'Divider'
-    },
-    {
         key: 'bin2dec',
         label: 'Binary to Decimal',
         path: '/page/BinToDec'

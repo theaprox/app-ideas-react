@@ -26,7 +26,6 @@ const Sidebar = () => {
     left: false,
     bottom: false,
     right: false,
-    open: true,
   });
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
@@ -51,6 +50,7 @@ const Sidebar = () => {
         <ListSubheader component="div" id="nested-list-subheader" color='inherit' sx={{ background: 'none' }} >
             Navigation
         </ListSubheader>
+        <Divider />
         {SIDEBAR.map((item) => (
                 (() => {
                   switch (item.key) {
