@@ -12,6 +12,10 @@ body {
   font-size: var(--default-paragraph-size);
 }
 
+ul, li {
+  all: unset;
+}
+
 a, button {
   cursor: pointer;
 }
@@ -31,18 +35,4 @@ footer a:hover {
 
 .sidebar a:hover {
   color: theme('colors.white');
-}
-
-input {
-  color: theme('colors.fade-black');
-  background: theme('colors.white');
-  border: none;
-  outline: none;
-  border-radius: .2rem;
-  padding: .2em .4em;
-}
-
-input:focus {
-  outline: 2px solid theme('colors.info');
-  border: none;
 }

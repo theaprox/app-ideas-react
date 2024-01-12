@@ -1,6 +1,9 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  corePlugins: {
+    preflight: false,
+  },
   prefix: 'tw-',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,10 +13,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "error": "#dc2626",
+        "warning": "#fb7185",
         "info": "#22d3ee",
         "success": "#15803d",
-        "warning": "#fb7185",
-        "error": "#dc2626",
         "white": "#fafaff",
         "fade-white-100": "#eaeaef",
         "fade-white-200": "#cacacf",

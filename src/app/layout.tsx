@@ -1,4 +1,10 @@
 import type { Metadata } from 'next';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import {
+  DocumentHeadTags,
+  AppCacheProvider,
+  documentGetInitialProps,
+} from '@mui/material-nextjs/v14-pagesRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import { Inter } from 'next/font/google';
 import Footer from './components/Footer';
@@ -9,6 +15,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import theme from './theme';
 import './globals.css';
+import { Breadcrumbs } from '@mui/material';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,21 +32,20 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-      <ThemeProvider theme={theme}>
-        <div className='tw-flex tw-flex-row tw-flex-1 tw-grow tw-min-h-screen tw-antialiased'>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <ThemeProvider theme={theme}>
+            <div className='tw-flex tw-flex-row tw-flex-1 tw-grow tw-min-h-screen tw-antialiased'>
+              <div className='tw-flex-none tw-flex tw-flex-col'>
+                <Sidebar />
+              </div>
 
-          <div className='tw-flex-none tw-flex tw-flex-col'>
-            <Sidebar />
-          </div>
-
-          <div className='tw-flex-1 tw-flex tw-flex-col tw-gap-0'>
-            <main className='tw-flex-1 tw-grow tw-flex'>
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </div>
-        </ThemeProvider>
+              <div className='tw-flex-1 tw-flex tw-flex-col tw-gap-0'>
+                <main className='tw-flex-1 tw-grow tw-flex'>{children}</main>
+                <Footer />
+              </div>
+            </div>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

@@ -1,28 +1,25 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import MemoryIcon from '@mui/icons-material/Memory';
 
 const BinToDec = () => {
   return (
-    <div className='tw-flex-1 tw-frow tw-flex tw-flex-col tw-justify-center'>
-      <h1 className='tw-flex-none tw-flex tw-justify-center tw-text-4xl tw-font-black tw-uppercase tw-p-4'>
-        Binary to Decimal
-      </h1>
-      <div className='tw-flex-1 tw-flex tw-flex-col tw-items-center tw-p-4'>
-        <div className='tw-flex tw-flex-col'>
-          <input type='text' className='' placeholder='binary'></input>
-          <Box
-            component='form'
-            sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-            noValidate
-            autoComplete='off'>
+    <div className='tw-flex-1 tw-grow tw-flex tw-flex-col tw-justify-start tw-items-center tw-pt-24'>
+      <div className='tw-flex-none tw-flex tw-flex-col tw-w-1/2 tw-gap-2 tw-max-w-md'>
             <TextField
               id='standard-basic'
-              label='Standard'
-              variant='standard'
+              label='Binary'
+              variant='outlined'
+              className=''
             />
-          </Box>
-        </div>
+            <TextField
+              id='standard-basic'
+              label='Decimal'
+              variant='outlined'
+            />
+            <Button component="label" color="primary" variant="contained" className='' startIcon={<MemoryIcon />}>Translate</Button>
       </div>
     </div>
   );
