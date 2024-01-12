@@ -13,6 +13,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "primary": "#ffa400",
         "error": "#dc2626",
         "warning": "#fb7185",
         "info": "#22d3ee",

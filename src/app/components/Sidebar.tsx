@@ -11,7 +11,6 @@ const Sidebar = () => {
     left: false,
     bottom: false,
     right: false,
-    open: true,
   });
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
@@ -27,8 +26,14 @@ const Sidebar = () => {
   };
 
   const list = (anchor: string) => (
+    <>
       <NestedList />
+    </>
   );
+
+  const sidebarStyle = {
+    backgroundColor: '#101015',
+  }
 
   return (
     <div className='tw-fixed tw-top-0 tw-left-0 tw-p-4'>
@@ -44,7 +49,17 @@ const Sidebar = () => {
           anchor='left'
           open={state['left']}
           onClose={toggleDrawer('left', false)}
-          onOpen={toggleDrawer('left', true)}>
+          onOpen={toggleDrawer('left', true)}
+          sx={{
+            '.MuiDrawer-paper': {
+              width: 'auto',
+              minWidth: '360px',
+              boxSizing: 'border-box',
+              backgroundImage: 'unset',
+              backgroundColor: '#101015',
+            },
+          }}
+          >
           {' '}
           {list('left')}
         </SwipeableDrawer>

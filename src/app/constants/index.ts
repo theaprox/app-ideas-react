@@ -19,19 +19,34 @@ interface SidebarItems {
   export const SIDEBAR: SidebarItems[] = [
     {
         key: 'home',
+        level: '1',
         label: 'Home',
         path: '/#',
-        icon: 'HomeIcon',
+        icon: 'home',
     },
     {
         key: 'level',
         level: '1',
-        label: 'Level - Beginner',
+        label: 'Beginner Level',
+        icon: 'level1',
         subitems:[
             {
                 key: 'bin2dec',
+                level: '2',
                 label: 'Binary to Decilam',
-                path: '/page/BinToDec'
+                path: '/page/BinToDec',
+            },
+            {
+                key: 'todo',
+                level: '2',
+                label: 'TODO List',
+                path: '/#',
+            },
+            {
+                key: 'radius',
+                level: '2',
+                label: 'Border Radius Preview',
+                path: '/page/BinToDec',
             }
         ]
     }
