@@ -1,7 +1,13 @@
 import type { Metadata } from 'next';
+import { ThemeProvider } from '@mui/material/styles';
 import { Inter } from 'next/font/google';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import theme from './theme';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -19,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+      <ThemeProvider theme={theme}>
         <div className='tw-flex tw-flex-row tw-flex-1 tw-grow tw-min-h-screen tw-antialiased'>
 
           <div className='tw-flex-none tw-flex tw-flex-col'>
@@ -32,6 +39,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </div>
+        </ThemeProvider>
       </body>
     </html>
   );

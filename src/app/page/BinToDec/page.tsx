@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const BinToDec = () => {
   return (
@@ -9,10 +11,21 @@ const BinToDec = () => {
       <div className='tw-flex-1 tw-flex tw-flex-col tw-items-center tw-p-4'>
         <div className='tw-flex tw-flex-col'>
           <input type='text' className='' placeholder='binary'></input>
+          <Box
+            component='form'
+            sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+            noValidate
+            autoComplete='off'>
+            <TextField
+              id='standard-basic'
+              label='Standard'
+              variant='standard'
+            />
+          </Box>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BinToDec
+export default BinToDec;
