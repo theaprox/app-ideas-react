@@ -1,4 +1,3 @@
-
 import {
   Button,
   Chip,
@@ -17,7 +16,6 @@ import {
 import React, { useState } from 'react';
 
 const FormElement = () => {
-
   //CLASSES
   const paperClasses = {
     '&.MuiPaper-root': {
@@ -71,10 +69,23 @@ const FormElement = () => {
   };
 
   // Input handling
-  const [decimal, setDecimal] = React.useState('')
-  const [inputError, setBinError] = React.useState(false)
+  const [decimal, setDecimal] = React.useState('');
+  const [inputError, setBinError] = React.useState(false);
 
+  const updateDec = (event: any) => {
+    event.preventDefault()
+    const value = event.target.value;
+    setBinError(false)
 
+    // check input validity
+    // check for length to avoid empty field error msg
+    if (value.length > 0 && value.match(/^[0-1]+$/g) === null) {
+      setBinError(true)
+      return
+    }
+
+    setDecimal(value)
+  };
 
   return (
     <>
@@ -87,17 +98,19 @@ const FormElement = () => {
               gutterBottom>
               Binary to Decimal
             </Typography>
-            <Typography
-              variant='body2'
-              gutterBottom>
-                Convert a binary number into a decimal.
+            <Typography variant='body2' gutterBottom>
+              Convert a binary number into a decimal.
             </Typography>
           </FormLabel>
 
-          <FormControl error={inputError} fullWidth variant='standard' sx={textFieldClasses}>
+          <FormControl
+            error={inputError}
+            fullWidth
+            variant='standard'
+            sx={textFieldClasses}>
             <Input
               name='binary'
-              onChange={(e) => setDecimal(e.target.value)}
+              onChange={updateDec}
               startAdornment={
                 <InputAdornment position='start'>BIN</InputAdornment>
               }
@@ -108,7 +121,11 @@ const FormElement = () => {
             </FormHelperText>
           </FormControl>
 
-          <FormControl disabled fullWidth variant='standard' sx={textFieldClasses}>
+          <FormControl
+            disabled
+            fullWidth
+            variant='standard'
+            sx={textFieldClasses}>
             <Input
               name='decimal'
               defaultValue={decimal}
