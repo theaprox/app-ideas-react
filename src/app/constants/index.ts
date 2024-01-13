@@ -1,7 +1,3 @@
-// Handle Font AWesome Icons for export
-
-import { Label } from "@mui/icons-material";
-
 
 // SIDEBAR COMPONENT DATA
 interface SidebarItems {
@@ -65,22 +61,22 @@ interface SidebarItems {
   export const FOOTER: FooterItems[] = [
     {
       label: 'discord',
-      link: 'https://discord.gg/aprox-plays-954030958980497429',
+      link: 'https://discord.gg/',
       faIcon: 'faDiscord',
     },
     {
       label: 'youtube',
-      link: 'https://www.youtube.com/@aproxplays',
+      link: 'https://www.youtube.com/',
       faIcon: 'faYoutube',
     },
     {
       label: 'twitch',
-      link: 'https://www.twitch.tv/aproxplayz',
+      link: 'https://www.twitch.tv/',
       faIcon: 'faTwitch',
     },
     {
       label: 'twitter',
-      link: 'https://www.twitter.com/aproxplays',
+      link: 'https://www.twitter.com/',
       faIcon: 'faXTwitter',
     }
   ];
