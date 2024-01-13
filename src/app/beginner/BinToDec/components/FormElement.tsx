@@ -73,28 +73,35 @@ const FormElement = () => {
   const [inputError, setBinError] = React.useState(false);
 
   // regular expression pattern to match
-    // used in value.match
-    // ^ - start of line anchor, $ - end of line anchor
-    // [x-y] - range between x and y
-    // /.../g - regular expresion for
-  const regex: RegExp = /^[0-1]+$/g
+  // used in value.match
+  // ^ - start of line anchor, $ - end of line anchor
+  // [x-y] - range between x and y
+  // /.../g - regular expresion for
+  const regex: RegExp = /^[0-1]+$/g;
 
   const updateDec = (event: any) => {
-    event.preventDefault()
-    setBinError(false)
-    setDecimal('')
+    event.preventDefault();
+    setBinError(false);
+    setDecimal('');
     const value = event.target.value;
 
-    // check for length avoid empty field error msg and match expression to 1s and 0s
-    if (value.length > 0 && value.match(regex) === null)
-      return setBinError(true)
+    // turn red if value exists and doesnt match format
+    if (value.length > 0 && value.match(regex) === null) {
+      setBinError(true);
+      return;
+    }
 
-    (value.length < 1 ? setDecimal('') : '')
+    // break and cleanup if input is empty
+    if (value.length < 1) {
+      setBinError(false);
+      setDecimal('');
+      return;
+    }
 
     // parseInt parses the string `value` in base 2 (binary) and converts it to a decimal (base 10) number
     // immediately stringify so setDecimal accepts the input
-    const decimal = parseInt(value, 2).toString()
-    setDecimal(decimal)
+    const decimal = parseInt(value, 2).toString();
+    setDecimal(decimal);
   };
 
   return (
@@ -139,7 +146,9 @@ const FormElement = () => {
             <Input
               name='decimal'
               defaultValue={decimal}
-              startAdornment={<InputAdornment position='start'>DEC</InputAdornment>}
+              startAdornment={
+                <InputAdornment position='start'>DEC</InputAdornment>
+              }
             />
             <FormHelperText id='standard-weight-helper-text'>
               Converted value will appear here
