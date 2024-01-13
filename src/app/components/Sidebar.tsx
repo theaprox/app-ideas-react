@@ -51,7 +51,7 @@ const Sidebar = () => {
           onClose={toggleDrawer('left', false)}
           onOpen={toggleDrawer('left', true)}
           sx={{
-            '.MuiDrawer-paper': {
+            '& .MuiPaper-root': {
               width: 'auto',
               minWidth: '360px',
               boxSizing: 'border-box',

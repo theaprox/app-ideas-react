@@ -15,22 +15,34 @@ const theme = createTheme({
         paper: 'rgba(0,0,0,1)',
     },
     primary: {
-        main: '#efefff',
+      light: '#f2f2ff',
+      main: '#efefff',
+      dark: '#a7a7b2',
     },
     secondary: {
-        main: '#ab47bc',
+      light: '#eb7333',
+      main: '#e65100',
+      dark: '#a13800',
     },
     error: {
-        main: '#d32f2f',
+      light: '#c54949',
+      main: '#b71c1c',
+      dark: '#801313',
     },
     warning: {
-        main: '#f57c00',
+      light: '#ffb633',
+      main: '#ffa400',
+      dark: '#b27200',
     },
     info: {
-        main: '#0288d1',
+      light: '#35baf6',
+      main: '#03a9f4',
+      dark: '#0276aa',
     },
     success: {
-        main: '#388e3c',
+      light: '#77a258',
+      main: '#558b2f',
+      dark: '#3b6120',
     },
   },
   typography: {
@@ -45,6 +57,15 @@ const theme = createTheme({
           }),
         }),
       },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 768,
+      lg: 1200,
+      xl: 1536,
     },
   },
 });
