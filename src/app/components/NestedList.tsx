@@ -13,7 +13,7 @@ import { SIDEBAR } from '../constants';
 import MuiIcon from './MuiIcon';
 
 export default function NestedList() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);

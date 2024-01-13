@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import {
   Button,
   Chip,
@@ -14,8 +15,10 @@ import {
   buttonClasses,
 } from '@mui/material';
 import React, { useState } from 'react';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 
 const FormElement = () => {
+  const theme = useTheme();
   //CLASSES
   const paperClasses = {
     '&.MuiPaper-root': {
@@ -60,11 +63,7 @@ const FormElement = () => {
     gap: 1,
   };
 
-  const textFieldClasses = {
-    width: '100%',
-  };
-
-  const buttonClasses = {
+  const textFieldClass = {
     width: '100%',
   };
 
@@ -111,12 +110,19 @@ const FormElement = () => {
           <FormLabel sx={formLabelClass}>
             <Typography
               variant='h5'
-              sx={{ textTransform: 'uppercase' }}
+              sx={{
+                textTransform: 'uppercase',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 1,
+              }}
               gutterBottom>
-              Binary to Decimal
+              <PsychologyIcon />
+              BIN to DEC
             </Typography>
-            <Typography variant='body2' gutterBottom>
-              Convert a binary number into a decimal.
+            <Typography variant='subtitle1' gutterBottom>
+              Maximum allowed binary number input length is 69 (nice!) digits.
             </Typography>
           </FormLabel>
 
@@ -124,14 +130,18 @@ const FormElement = () => {
             error={inputError}
             fullWidth
             variant='standard'
-            sx={textFieldClasses}>
+            sx={textFieldClass}>
+            {
+              //(inputError) && (<InputLabel htmlFor="filled-adornment-amount">Error</InputLabel>)
+            }
             <Input
+              multiline
               name='binary'
               onChange={updateDec}
               startAdornment={
                 <InputAdornment position='start'>BIN</InputAdornment>
               }
-              inputProps={{ inputMode: 'numeric', maxLength: 8 }}
+              inputProps={{ inputMode: 'numeric', maxLength: 69 }}
             />
             <FormHelperText id='standard-weight-helper-text'>
               Only 1s and 0s allowrd
@@ -142,7 +152,7 @@ const FormElement = () => {
             disabled
             fullWidth
             variant='standard'
-            sx={textFieldClasses}>
+            sx={textFieldClass}>
             <Input
               name='decimal'
               defaultValue={decimal}
@@ -150,9 +160,6 @@ const FormElement = () => {
                 <InputAdornment position='start'>DEC</InputAdornment>
               }
             />
-            <FormHelperText id='standard-weight-helper-text'>
-              Converted value will appear here
-            </FormHelperText>
           </FormControl>
         </FormGroup>
       </Paper>

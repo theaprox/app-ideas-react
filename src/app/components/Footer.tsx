@@ -28,7 +28,7 @@ const Footer = () => {
       </div>
 
       <aside className=' tw-text-center tw-flex tw-flex-wrap tw-max-w-full '>
-        <p>© 2024 - Aprox Media Group, All right reserved</p>
+        <p>© 2024 - All right reserved</p>
       </aside>
 
     </footer>

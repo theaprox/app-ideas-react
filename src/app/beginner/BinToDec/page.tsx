@@ -1,10 +1,6 @@
 'use client';
 import React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
-import MemoryIcon from '@mui/icons-material/Memory';
-import FormElement from './components/FormElement';
+import FormElement from './FormElement';
 
 const BinToDec = () => {
   return (
