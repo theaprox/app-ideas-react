@@ -1,8 +1,23 @@
-import { Button, FormGroup, FormLabel, Paper, TextField, buttonClasses } from '@mui/material';
-import MemoryIcon from '@mui/icons-material/Memory';
-import React from 'react';
+
+import {
+  Button,
+  Chip,
+  FormControl,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+  Input,
+  InputAdornment,
+  InputLabel,
+  Paper,
+  TextField,
+  Typography,
+  buttonClasses,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 const FormElement = () => {
+
   //CLASSES
   const paperClasses = {
     '&.MuiPaper-root': {
@@ -16,78 +31,96 @@ const FormElement = () => {
     maxWidth: 'md',
     padding: 2,
   };
+
   const formGroupClass = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'start',
     flexGrow: 1,
     width: '100%',
-    gap: 1,
+    gap: 3,
     '*': {
       gap: 0,
     },
   };
-  const formLabelClasses = {
+
+  const formLabelClass = {
     fontSize: '1em',
     display: 'flex',
     flexDirection: 'column',
     fontWeight: 'light',
     gap: 0,
-    py: 1,
-    '*': {
-        flexGrow: 0,
-        py: 1,
-        m: 0,
-    },
-    'h3': {
-        py: 1,
-        textTransform: 'uppercase',
-    }
   };
+
+  const typographyOverline = {
+    p: 0,
+    m: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'start',
+    gap: 1,
+  };
+
   const textFieldClasses = {
     width: '100%',
   };
+
   const buttonClasses = {
     width: '100%',
-    height: '64px',
   };
+
+  // Input handling
+  const [decimal, setDecimal] = React.useState('')
+  const [inputError, setBinError] = React.useState(false)
+
+
 
   return (
     <>
       <Paper component='form' sx={paperClasses} elevation={8}>
         <FormGroup sx={formGroupClass}>
-
-          <FormLabel sx={formLabelClasses}>
-            <h3>Translate BIN to DEC</h3>
-            <p>
-              Input binary numbers and hit the button to convert to decimal
-              value.
-            </p>
+          <FormLabel sx={formLabelClass}>
+            <Typography
+              variant='h5'
+              sx={{ textTransform: 'uppercase' }}
+              gutterBottom>
+              Binary to Decimal
+            </Typography>
+            <Typography
+              variant='body2'
+              gutterBottom>
+                Convert a binary number into a decimal.
+            </Typography>
           </FormLabel>
 
-          <TextField
-            sx={textFieldClasses}
-            id='outlined-basic'
-            label='Binary'
-            variant='outlined'
-            inputProps={{ inputMode: 'numeric' }}
-          />
+          <FormControl error={inputError} fullWidth variant='standard' sx={textFieldClasses}>
+            <Input
+              name='binary'
+              onChange={(e) => setDecimal(e.target.value)}
+              startAdornment={
+                <InputAdornment position='start'>BIN</InputAdornment>
+              }
+              inputProps={{ inputMode: 'numeric' }}
+            />
+            <FormHelperText id='standard-weight-helper-text'>
+              Only 1s and 0s allowrd
+            </FormHelperText>
+          </FormControl>
 
-          <TextField
-            sx={textFieldClasses}
-            disabled
-            id='filled-disabled'
-            label='Decimal Value'
-            variant='filled'
-          />
-
-        <Button
-            startIcon={<MemoryIcon />}
-            sx={buttonClasses} variant='contained'
-            color='success'>
-            Convert
-        </Button>
-
+          <FormControl disabled fullWidth variant='standard' sx={textFieldClasses}>
+            <Input
+              name='decimal'
+              defaultValue={decimal}
+              startAdornment={
+                <InputAdornment position='start'>DEC</InputAdornment>
+              }
+              inputProps={{ inputMode: 'numeric' }}
+            />
+            <FormHelperText id='standard-weight-helper-text'>
+              Converted value will appear here
+            </FormHelperText>
+          </FormControl>
         </FormGroup>
       </Paper>
     </>
