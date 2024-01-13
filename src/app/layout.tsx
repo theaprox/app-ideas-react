@@ -32,15 +32,17 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+        <AppRouterCacheProvider options={{ enableCssLayer: false }}>
           <ThemeProvider theme={theme}>
-            <div className='tw-flex tw-flex-row tw-flex-1 tw-grow tw-min-h-screen tw-antialiased'>
+            <div className='tw-flex tw-flex-row tw-flex-1 tw-grow tw-min-h-dvh tw-antialiased'>
               <div className='tw-flex-none tw-flex tw-flex-col'>
                 <Sidebar />
               </div>
 
               <div className='tw-flex-1 tw-flex tw-flex-col tw-gap-0'>
-                <main className='tw-flex-1 tw-grow tw-flex'>{children}</main>
+                <main className='tw-flex-1 tw-grow tw-flex'>
+                  {children}
+                </main>
                 <Footer />
               </div>
             </div>

@@ -21,7 +21,7 @@ interface SidebarItems {
         key: 'home',
         level: '1',
         label: 'Home',
-        path: '/#',
+        path: '/',
         icon: 'home',
     },
     {
@@ -34,7 +34,7 @@ interface SidebarItems {
                 key: 'bin2dec',
                 level: '2',
                 label: 'Binary to Decilam',
-                path: '/page/BinToDec',
+                path: '/beginner/BinToDec',
             },
             {
                 key: 'todo',

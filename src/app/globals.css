@@ -6,10 +6,16 @@
   --default-paragraph-size: '12px';
 }
 
+html {
+  overflow-x: hidden;
+  max-width: 100dvw;
+}
 body {
   color: theme('colors.white');
   background: theme('colors.fade-black');
   font-size: var(--default-paragraph-size);
+  overflow-x: hidden;
+  font-size: 1em;
 }
 
 ul, li {
