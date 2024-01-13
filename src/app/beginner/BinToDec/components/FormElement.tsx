@@ -72,19 +72,29 @@ const FormElement = () => {
   const [decimal, setDecimal] = React.useState('');
   const [inputError, setBinError] = React.useState(false);
 
+  // regular expression pattern to match
+    // used in value.match
+    // ^ - start of line anchor, $ - end of line anchor
+    // [x-y] - range between x and y
+    // /.../g - regular expresion for
+  const regex: RegExp = /^[0-1]+$/g
+
   const updateDec = (event: any) => {
     event.preventDefault()
-    const value = event.target.value;
     setBinError(false)
+    setDecimal('')
+    const value = event.target.value;
 
-    // check input validity
-    // check for length to avoid empty field error msg
-    if (value.length > 0 && value.match(/^[0-1]+$/g) === null) {
-      setBinError(true)
-      return
-    }
+    // check for length avoid empty field error msg and match expression to 1s and 0s
+    if (value.length > 0 && value.match(regex) === null)
+      return setBinError(true)
 
-    setDecimal(value)
+    (value.length < 1 ? setDecimal('') : '')
+
+    // parseInt parses the string `value` in base 2 (binary) and converts it to a decimal (base 10) number
+    // immediately stringify so setDecimal accepts the input
+    const decimal = parseInt(value, 2).toString()
+    setDecimal(decimal)
   };
 
   return (
@@ -114,7 +124,7 @@ const FormElement = () => {
               startAdornment={
                 <InputAdornment position='start'>BIN</InputAdornment>
               }
-              inputProps={{ inputMode: 'numeric' }}
+              inputProps={{ inputMode: 'numeric', maxLength: 8 }}
             />
             <FormHelperText id='standard-weight-helper-text'>
               Only 1s and 0s allowrd
@@ -129,10 +139,7 @@ const FormElement = () => {
             <Input
               name='decimal'
               defaultValue={decimal}
-              startAdornment={
-                <InputAdornment position='start'>DEC</InputAdornment>
-              }
-              inputProps={{ inputMode: 'numeric' }}
+              startAdornment={<InputAdornment position='start'>DEC</InputAdornment>}
             />
             <FormHelperText id='standard-weight-helper-text'>
               Converted value will appear here
