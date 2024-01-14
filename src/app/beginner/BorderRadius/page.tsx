@@ -6,26 +6,26 @@ import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 
-function CustomTabPanel(props: any) {
+//@ts-ignore
+function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
-      role='tabpanel'
+      role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}>
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+        <Box sx={{ p: 3 }}>{children}</Box>
       )}
     </div>
   );
 }
 
-CustomTabPanel.propTypes = {
+TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -144,7 +144,7 @@ const BorderRadius = () => {
           </Typography>
         </Box>
 
-        <Box>
+        <Box component='div'>
           <Tabs
             centered
             value={value}
@@ -155,15 +155,16 @@ const BorderRadius = () => {
             <Tab sx={tabStyleClass} label='Advanced' {...a11yProps(1)} />
           </Tabs>
 
-          <CustomTabPanel value={value} index={0}>
-            <Box sx={panelBoxClass}>
+          <TabPanel value={value} index={0}>
+            <Box component='div' sx={panelBoxClass}>
               <Box
                 sx={{
                   width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 2,
-                }}>
+                }}
+                component='div'>
                 <FormLabel>
                   Simple radius adjustment.
                 </FormLabel>
@@ -188,11 +189,11 @@ const BorderRadius = () => {
                 <Box sx={simpleRadiusBox}></Box>
               </Box>
             </Box>
-          </CustomTabPanel>
+          </TabPanel>
 
-          <CustomTabPanel value={value} index={1}>
+          <TabPanel value={value} index={1}>
             Advanced controls
-          </CustomTabPanel>
+          </TabPanel>
         </Box>
       </Paper>
     </div>

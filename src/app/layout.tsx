@@ -40,7 +40,7 @@ export default function RootLayout({
               </div>
 
               <div className='tw-flex-1 tw-flex tw-flex-col tw-gap-0'>
-                <main className='tw-flex-1 tw-grow tw-flex'>
+                <main className='tw-flex-1 tw-grow tw-flex tw-min-h-dvh'>
                   {children}
                 </main>
                 <Footer />
