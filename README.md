@@ -4,9 +4,9 @@
 
 A list of projects in this repository starting from the easyest and owrking a way down to more complex and advanced.
 
-- [Binary To Decimal Translator](#1:-Binary-To-Decimal)
+- [Binary To Decimal Translator](#Binary-To-Decimal)
 
-## 1: Binary to Decimal
+## Binary to Decimal
 
 <details>
 <summary>About project</summary>
