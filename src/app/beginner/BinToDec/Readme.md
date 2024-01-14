@@ -1,5 +1,6 @@
 ## Binary to Decimal
 
+---
 
 **Tier:** 1-Beginner
 
@@ -27,5 +28,3 @@ constraints:
 
 **Bonus features**
 - [x] User can enter a variable number of binary digits
-
----

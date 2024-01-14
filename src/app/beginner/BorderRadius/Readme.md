@@ -1,5 +1,6 @@
-
 ## Border Radius Preview
+
+---
 
 **Tier:** 1-Beginner
 
@@ -14,5 +15,3 @@ The border-radius property can have multiple values changed. Preview how the sha
 **Bonus features**
 
 -   [x] User can change all 8 possible values of the border-radius in order to create a complex shape
-
----
