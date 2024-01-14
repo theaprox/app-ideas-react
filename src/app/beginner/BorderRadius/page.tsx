@@ -1,12 +1,13 @@
 'use client';
 import * as React from 'react';
-import { Box, FormLabel, Paper, Slider, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import BorderStyleIcon from '@mui/icons-material/BorderStyle';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import SimpleRadius from './SimpleRadius';
 import AdvancedRadius from './AdvancedRadius';
+import SimpleSuspense from './SimpleSuspense';
 
 //@ts-ignore
 function TabPanel(props) {
@@ -76,44 +77,46 @@ const BorderRadius = () => {
   return (
     <div className='tw-flex-1 tw-grow tw-flex tw-flex-col tw-items-center tw-pt-24'>
       <Paper component='form' sx={paperClass} elevation={8}>
-        <Box>
-          <Typography
-            variant='h5'
-            sx={{
-              textTransform: 'uppercase',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 1,
-            }}
-            gutterBottom>
-            <BorderStyleIcon />
-            Border Radius
-          </Typography>
-          <Typography variant='subtitle1' gutterBottom>
-            Adjust box border radius
-          </Typography>
-        </Box>
+        <React.Suspense fallback={<SimpleSuspense />}>
+          <Box>
+            <Typography
+              variant='h5'
+              sx={{
+                textTransform: 'uppercase',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 1,
+              }}
+              gutterBottom>
+              <BorderStyleIcon />
+              Border Radius
+            </Typography>
+            <Typography variant='subtitle1' gutterBottom>
+              Adjust box border radius
+            </Typography>
+          </Box>
 
-        <Box component='div'>
-          <Tabs
-            centered
-            value={value}
-            onChange={handleChange}
-            aria-label='basic tabs example'
-            sx={tabBoxClass}>
-            <Tab sx={tabStyleClass} label='Simple' {...a11yProps(0)} />
-            <Tab sx={tabStyleClass} label='Advanced' {...a11yProps(1)} />
-          </Tabs>
+          <Box component='div'>
+            <Tabs
+              centered
+              value={value}
+              onChange={handleChange}
+              aria-label='basic tabs example'
+              sx={tabBoxClass}>
+              <Tab sx={tabStyleClass} label='Simple' {...a11yProps(0)} />
+              <Tab sx={tabStyleClass} label='Advanced' {...a11yProps(1)} />
+            </Tabs>
 
-          <TabPanel value={value} index={0}>
-            <SimpleRadius />
-          </TabPanel>
+            <TabPanel value={value} index={0}>
+              <SimpleRadius />
+            </TabPanel>
 
-          <TabPanel value={value} index={1}>
-            <AdvancedRadius />
-          </TabPanel>
-        </Box>
+            <TabPanel value={value} index={1}>
+              <AdvancedRadius />
+            </TabPanel>
+          </Box>
+        </React.Suspense>
       </Paper>
     </div>
   );
