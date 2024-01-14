@@ -65,7 +65,7 @@ const FormElement = () => {
   // Input handling
   const [decimal, setDecimal] = React.useState('');
   const [inputError, setBinError] = React.useState(false);
-  const [inputColor, setInputColor] = React.useState('primary');
+  const [inputColor, setInputColor] = React.useState(false);
   
   // regular expression pattern to match
   // used in value.match
@@ -87,14 +87,14 @@ const FormElement = () => {
     // break and cleanup if input is empty
     if (value.length < 1) {
       setBinError(false);
-      setInputColor('primary');
+      setInputColor(false);
       setDecimal('');
       return;
     }
 
     // clear bad input style
     setBinError(false);
-    setInputColor('success');
+    setInputColor(true);
 
     // parseInt parses the string `value` in base 2 (binary) and converts it to a decimal (base 10) number
     // immediately stringify so setDecimal accepts the input
@@ -128,7 +128,7 @@ const FormElement = () => {
 
           <FormControl
             error={inputError}
-            color={inputColor}
+            color={(inputColor ? 'success' : 'primary')}
             focused={true}
             fullWidth
             variant='standard'

@@ -35,14 +35,8 @@ interface SidebarItems {
             {
                 key: 'borderradius',
                 level: '2',
-                label: 'Border Radius',
-                path: '/beginner/BorderRadius',
-            },
-            {
-                key: 'radius',
-                level: '2',
                 label: 'Border Radius Preview',
-                path: '/page/BinToDec',
+                path: '/beginner/BorderRadius',
             }
         ]
     }
