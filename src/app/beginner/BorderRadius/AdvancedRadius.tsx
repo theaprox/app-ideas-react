@@ -4,27 +4,19 @@ import React from 'react';
 //@ts-ignore
 
 const AdvancedRadius = () => {
-  const [topValue, setTopValue] = React.useState(30);
-  const [rightValue, setRightValue] = React.useState(-40);
-  const [bottomValue, setBottomValue] = React.useState(-30);
-  const [leftValue, setLeftValue] = React.useState(60);
+  const [radius, setRadius] = React.useState({
+    top: 30,
+    right: (-40),
+    bottom: (-30),
+    left: 60,
+  });
+  
+  //@ts-ignore
+  // updating values from sliders
+  const updateRadius = (type) => (event) => {
+    setRadius({ ...radius, [type]: event.target.value });
+  };
 
-  //@ts-ignore
-  const topChange = (event, newValue) => {
-    setTopValue(newValue);
-  };
-  //@ts-ignore
-  const rightChange = (event, newValue) => {
-    setRightValue(newValue);
-  };
-  //@ts-ignore
-  const bottomChange = (event, newValue) => {
-    setBottomValue(newValue);
-  };
-  //@ts-ignore
-  const leftChange = (event, newValue) => {
-    setLeftValue(newValue);
-  };
 
   const panelBoxClass = {
     width: '100%',
@@ -56,10 +48,10 @@ const AdvancedRadius = () => {
     height: 'auto',
     maxWidth: '320px',
     aspectRatio: '1/1',
-    borderTopLeftRadius: `${topValue}% ${100 - leftValue}%`,
-    borderTopRightRadius: `${100 - topValue}% ${Math.abs(rightValue)}%`,
-    borderBottomRightRadius: `${Math.abs(bottomValue)}% ${100 - Math.abs(rightValue)}%`,
-    borderBottomLeftRadius: `${100 - Math.abs(bottomValue)}% ${leftValue}%`,
+    borderTopLeftRadius: `${radius['top']}% ${100 - radius['left']}%`,
+    borderTopRightRadius: `${100 - radius['top']}% ${Math.abs(radius['right'])}%`,
+    borderBottomRightRadius: `${Math.abs(radius['bottom'])}% ${100 - Math.abs(radius['right'])}%`,
+    borderBottomLeftRadius: `${100 - Math.abs(radius['bottom'])}% ${radius['left']}%`,
     bgcolor: 'info.light',
     display: 'flex',
     alignItems: 'start',
@@ -126,21 +118,21 @@ const AdvancedRadius = () => {
           color='info'
           size='small'
           variant='outlined'
-          label={topValue + ' | ' + (100 - leftValue)}
+          label={radius['top'] + ' | ' + (100 - radius['left'])}
           sx={{ width: 'auto', position: 'absolute', top: 0, left: 0, m: 1 }}
         />
         <Chip
           color='info'
           size='small'
           variant='outlined'
-          label={100 - topValue + ' | ' + Math.abs(rightValue)}
+          label={100 - radius['top'] + ' | ' + Math.abs(radius['right'])}
           sx={{ width: 'auto', position: 'absolute', top: 0, right: 0, m: 1 }}
         />
         <Chip
           color='info'
           size='small'
           variant='outlined'
-          label={Math.abs(bottomValue) + ' | ' + (100 - Math.abs(rightValue))}
+          label={Math.abs(radius['bottom']) + ' | ' + (100 - Math.abs(radius['right']))}
           sx={{
             width: 'auto',
             position: 'absolute',
@@ -153,7 +145,7 @@ const AdvancedRadius = () => {
           color='info'
           size='small'
           variant='outlined'
-          label={100 - Math.abs(bottomValue) + ' | ' + leftValue}
+          label={100 - Math.abs(radius['bottom']) + ' | ' + radius['left']}
           sx={{ width: 'auto', position: 'absolute', bottom: 0, left: 0, m: 1 }}
         />
         <Box sx={simpleRadiusBox}>
@@ -165,10 +157,10 @@ const AdvancedRadius = () => {
             max={100}
             min={0}
             size='small'
-            defaultValue={topValue}
+            defaultValue={radius['top']}
             aria-label='topSlider'
             name='topSlider'
-            onChange={topChange}
+            onChange={updateRadius('top')}
             valueLabelDisplay='off'
           />
           <Slider
@@ -180,10 +172,10 @@ const AdvancedRadius = () => {
             max={0}
             min={-100}
             size='small'
-            defaultValue={rightValue}
+            defaultValue={radius['right']}
             aria-label='rightSlider'
             name='rightSlider'
-            onChange={rightChange}
+            onChange={updateRadius('right')}
             valueLabelDisplay='off'
           />
           <Slider
@@ -195,10 +187,10 @@ const AdvancedRadius = () => {
             min={-100}
             scale={(x) => -x}
             size='small'
-            defaultValue={bottomValue}
+            defaultValue={radius['bottom']}
             aria-label='bottomSlider'
             name='bottomSlider'
-            onChange={bottomChange}
+            onChange={updateRadius('bottom')}
             valueLabelDisplay='off'
           />
           <Slider
@@ -210,10 +202,10 @@ const AdvancedRadius = () => {
             max={100}
             min={0}
             size='small'
-            defaultValue={leftValue}
+            defaultValue={radius['left']}
             aria-label='leftSlider'
             name='leftSlider'
-            onChange={leftChange}
+            onChange={updateRadius('left')}
             valueLabelDisplay='off'
           />
         </Box>
