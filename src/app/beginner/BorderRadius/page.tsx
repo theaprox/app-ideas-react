@@ -5,6 +5,7 @@ import BorderStyleIcon from '@mui/icons-material/BorderStyle';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
+import SimpleRadius from './SimpleRadius';
 
 //@ts-ignore
 function TabPanel(props) {
@@ -12,15 +13,12 @@ function TabPanel(props) {
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>{children}</Box>
-      )}
+      {...other}>
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -41,7 +39,6 @@ function a11yProps(index) {
 
 const BorderRadius = () => {
   const [value, setValue] = React.useState(0);
-  const [simpleRadius, setSimpleRadius] = React.useState(0);
 
   //@ts-ignore
   const handleChange = (event, newValue) => {
@@ -73,53 +70,6 @@ const BorderRadius = () => {
   const tabStyleClass = {
     flexGrow: 1,
     m: 0,
-  };
-
-  const panelBoxClass = {
-    width: '100%',
-    height: 'auto',
-    aspectRatio: '1/1',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'start',
-    gap: 2,
-  };
-
-  const interactiveBoxHolderClass = {
-    width: '100%',
-    height: 'auto',
-    aspectRatio: '1/1',
-    border: '1px dashed grey',
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 1,
-    Typography: 'body1',
-    py:0,
-    m:0,
-  };
-
-  const sliderClass = {
-    maxWidth: '240px',
-  };
-
-  const simpleRadiusBox = {
-    width: 2 / 3,
-    height: 'auto',
-    aspectRatio: '1/1',
-    borderRadius: `${simpleRadius}%`,
-    bgcolor: 'info.light',
-    '&:hover': {
-      bgcolor: 'info.main',
-    },
-  }
-
-  //@ts-ignore
-  const valueText = (value) => {
-    setSimpleRadius(value);
-    return `${value}`;
   };
 
   return (
@@ -156,39 +106,7 @@ const BorderRadius = () => {
           </Tabs>
 
           <TabPanel value={value} index={0}>
-            <Box component='div' sx={panelBoxClass}>
-              <Box
-                sx={{
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                }}
-                component='div'>
-                <FormLabel>
-                  Simple radius adjustment.
-                </FormLabel>
-                <Slider
-                  sx={sliderClass}
-                  name='simpleRadiusSlider'
-                  aria-label='Radius'
-                  defaultValue={12}
-                  getAriaValueText={valueText}
-                  valueLabelDisplay='auto'
-                  step={1}
-                  min={0}
-                  max={50}
-                />
-              </Box>
-
-              <Box component='section' sx={interactiveBoxHolderClass}>
-                <FormLabel
-                  sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  Radius: {simpleRadius}%
-                </FormLabel>
-                <Box sx={simpleRadiusBox}></Box>
-              </Box>
-            </Box>
+            <SimpleRadius />
           </TabPanel>
 
           <TabPanel value={value} index={1}>
