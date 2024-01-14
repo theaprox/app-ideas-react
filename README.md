@@ -4,6 +4,7 @@ A list of projects in this repository starting from the easyest and owrking a wa
 
 ### Table of contents
 
+Level: **Beginner**
 - [Binary To Decimal Translator](https://github.com/theaprox/app-ideas-react/tree/master/src/app/beginner/BinToDec) - Realtime BIN to DEC converter with interactive UI and feedback.
 - [Border Radius Pewview](https://github.com/theaprox/app-ideas-react/tree/master/src/app/beginner/BorderRadius) - Border radius playground with interactive UI and blob creation.
 
