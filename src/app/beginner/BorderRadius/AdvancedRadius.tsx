@@ -1,4 +1,4 @@
-import { Box, Chip, FormLabel, Slider, Typography } from '@mui/material';
+import { Box, FormLabel, Chip, Slider } from '@mui/material';
 import React from 'react';
 
 //@ts-ignore
@@ -46,12 +46,8 @@ const AdvancedRadius = () => {
     Typography: 'body1',
     border: '1px dashed grey',
     gap: 1,
-    py: 4,
+    py: 5,
     m: 0,
-  };
-
-  const sliderClass = {
-    maxWidth: '240px',
   };
 
   const simpleRadiusBox = {
@@ -60,10 +56,10 @@ const AdvancedRadius = () => {
     height: 'auto',
     maxWidth: '320px',
     aspectRatio: '1/1',
-    borderTopLeftRadius: `    ${topValue}%                       ${100 - leftValue}%`,
-    borderTopRightRadius: `   ${100 - topValue}%                 ${Math.abs(rightValue)}%`,
-    borderBottomRightRadius: `${Math.abs(bottomValue)}%          ${100 - Math.abs(rightValue)}%`,
-    borderBottomLeftRadius: ` ${100 - Math.abs(bottomValue)}%    ${leftValue}%`,
+    borderTopLeftRadius: `${topValue}% ${100 - leftValue}%`,
+    borderTopRightRadius: `${100 - topValue}% ${Math.abs(rightValue)}%`,
+    borderBottomRightRadius: `${Math.abs(bottomValue)}% ${100 - Math.abs(rightValue)}%`,
+    borderBottomLeftRadius: `${100 - Math.abs(bottomValue)}% ${leftValue}%`,
     bgcolor: 'info.light',
     display: 'flex',
     alignItems: 'start',
@@ -126,10 +122,40 @@ const AdvancedRadius = () => {
   return (
     <Box component='div' sx={panelBoxClass}>
       <Box component='section' sx={interactiveBoxHolderClass}>
-        <Chip size='small' label={topValue + ' | ' + (100 - leftValue)} sx={{ width: 'auto', position: 'absolute', top:0, left:0, m:1, }}/>
-        <Chip size='small' label={(100 - topValue) + ' | ' + Math.abs(rightValue)} sx={{ width: 'auto', position: 'absolute', top:0, right:0, m:1, }}/>
-        <Chip size='small' label={Math.abs(bottomValue) + ' | ' + (100- Math.abs(rightValue))} sx={{ width: 'auto', position: 'absolute', bottom:0, right:0, m:1, }}/>
-        <Chip size='small' label={(100 - Math.abs(bottomValue)) + ' | ' + leftValue} sx={{ width: 'auto', position: 'absolute', bottom:0, left:0, m:1, }}/>
+        <Chip
+          color='info'
+          size='small'
+          variant='outlined'
+          label={topValue + ' | ' + (100 - leftValue)}
+          sx={{ width: 'auto', position: 'absolute', top: 0, left: 0, m: 1 }}
+        />
+        <Chip
+          color='info'
+          size='small'
+          variant='outlined'
+          label={100 - topValue + ' | ' + Math.abs(rightValue)}
+          sx={{ width: 'auto', position: 'absolute', top: 0, right: 0, m: 1 }}
+        />
+        <Chip
+          color='info'
+          size='small'
+          variant='outlined'
+          label={Math.abs(bottomValue) + ' | ' + (100 - Math.abs(rightValue))}
+          sx={{
+            width: 'auto',
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            m: 1,
+          }}
+        />
+        <Chip
+          color='info'
+          size='small'
+          variant='outlined'
+          label={100 - Math.abs(bottomValue) + ' | ' + leftValue}
+          sx={{ width: 'auto', position: 'absolute', bottom: 0, left: 0, m: 1 }}
+        />
         <Box sx={simpleRadiusBox}>
           <Slider
             sx={topSlider}
