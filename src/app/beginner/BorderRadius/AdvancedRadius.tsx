@@ -1,9 +1,31 @@
-import { Box, FormLabel, Slider } from '@mui/material';
+import { Box, Chip, FormLabel, Slider, Typography } from '@mui/material';
 import React from 'react';
 
 //@ts-ignore
 
 const AdvancedRadius = () => {
+  const [topValue, setTopValue] = React.useState(30);
+  const [rightValue, setRightValue] = React.useState(-40);
+  const [bottomValue, setBottomValue] = React.useState(-30);
+  const [leftValue, setLeftValue] = React.useState(60);
+
+  //@ts-ignore
+  const topChange = (event, newValue) => {
+    setTopValue(newValue);
+  };
+  //@ts-ignore
+  const rightChange = (event, newValue) => {
+    setRightValue(newValue);
+  };
+  //@ts-ignore
+  const bottomChange = (event, newValue) => {
+    setBottomValue(newValue);
+  };
+  //@ts-ignore
+  const leftChange = (event, newValue) => {
+    setLeftValue(newValue);
+  };
+
   const panelBoxClass = {
     width: '100%',
     height: 'auto',
@@ -14,6 +36,7 @@ const AdvancedRadius = () => {
   };
 
   const interactiveBoxHolderClass = {
+    position: 'relative',
     width: '100%',
     height: 'auto',
     display: 'flex',
@@ -37,10 +60,14 @@ const AdvancedRadius = () => {
     height: 'auto',
     maxWidth: '320px',
     aspectRatio: '1/1',
-    borderTopLeftRadius: `50% 50%`,
-    borderTopRightRadius: `50% 50%`,
-    borderBottomRightRadius: `50% 50%`,
-    borderBottomLeftRadius: `50% 50%`,
+    borderTopLeftRadius: `${topValue}% ${100 - leftValue}%`,
+    borderTopRightRadius: `${100 - topValue}% ${Math.abs(-1 * rightValue)}%`,
+    borderBottomRightRadius: `${Math.abs(-1 * bottomValue)}% ${Math.abs(
+      100 - -1 * rightValue
+    )}%`,
+    borderBottomLeftRadius: `${Math.abs(
+      100 - -1 * bottomValue
+    )}% ${leftValue}%`,
     bgcolor: 'info.light',
     display: 'flex',
     alignItems: 'start',
@@ -54,7 +81,7 @@ const AdvancedRadius = () => {
     display: 'flex',
     flexDirection: 'column',
     gap: 1,
-  }
+  };
 
   const topSlider = {
     position: 'absolute',
@@ -64,7 +91,7 @@ const AdvancedRadius = () => {
     '.MuiSlider-rail, .MuiSlider-track': {
       visibility: 'hidden',
     },
-  }
+  };
   const bottomSlider = {
     position: 'absolute',
     top: '100%',
@@ -73,12 +100,12 @@ const AdvancedRadius = () => {
     '.MuiSlider-rail, .MuiSlider-track': {
       visibility: 'hidden',
     },
-  }
+  };
 
   const rightSlider = {
     position: 'absolute',
     top: 0,
-    left: "100%",
+    left: '100%',
     transform: 'translate(-50%, 0%)',
     '.MuiSlider-rail, .MuiSlider-track': {
       visibility: 'hidden',
@@ -86,7 +113,7 @@ const AdvancedRadius = () => {
     '& input[type="range"]': {
       WebkitAppearance: 'slider-vertical',
     },
-  }
+  };
   const leftSlider = {
     position: 'absolute',
     top: 0,
@@ -98,11 +125,15 @@ const AdvancedRadius = () => {
     '& input[type="range"]': {
       WebkitAppearance: 'slider-vertical',
     },
-  }
+  };
 
   return (
     <Box component='div' sx={panelBoxClass}>
       <Box component='section' sx={interactiveBoxHolderClass}>
+        <Chip size='small' label={topValue} sx={{ width: 'auto', position: 'absolute', top:0, left:0, m:1, }}/>
+        <Chip size='small' label={Math.abs(rightValue)} sx={{ width: 'auto', position: 'absolute', top:0, right:0, m:1, }}/>
+        <Chip size='small' label={Math.abs(bottomValue)} sx={{ width: 'auto', position: 'absolute', bottom:0, right:0, m:1, }}/>
+        <Chip size='small' label={leftValue} sx={{ width: 'auto', position: 'absolute', bottom:0, left:0, m:1, }}/>
         <Box sx={simpleRadiusBox}>
           <Slider
             sx={topSlider}
@@ -112,9 +143,11 @@ const AdvancedRadius = () => {
             max={100}
             min={0}
             size='small'
-            defaultValue={50}
+            defaultValue={topValue}
             aria-label='topSlider'
-            valueLabelDisplay='auto'
+            name='topSlider'
+            onChange={topChange}
+            valueLabelDisplay='off'
           />
           <Slider
             orientation='vertical'
@@ -122,24 +155,29 @@ const AdvancedRadius = () => {
             disabled={false}
             marks={false}
             step={1}
-            max={100}
-            min={0}
+            max={0}
+            min={-100}
             size='small'
-            defaultValue={50}
+            defaultValue={rightValue}
             aria-label='rightSlider'
-            valueLabelDisplay='auto'
+            name='rightSlider'
+            onChange={rightChange}
+            valueLabelDisplay='off'
           />
           <Slider
             sx={bottomSlider}
             disabled={false}
             marks={false}
             step={1}
-            max={100}
-            min={0}
+            max={0}
+            min={-100}
+            scale={(x) => -x}
             size='small'
-            defaultValue={50}
+            defaultValue={bottomValue}
             aria-label='bottomSlider'
-            valueLabelDisplay='auto'
+            name='bottomSlider'
+            onChange={bottomChange}
+            valueLabelDisplay='off'
           />
           <Slider
             orientation='vertical'
@@ -150,15 +188,19 @@ const AdvancedRadius = () => {
             max={100}
             min={0}
             size='small'
-            defaultValue={50}
+            defaultValue={leftValue}
             aria-label='leftSlider'
-            valueLabelDisplay='auto'
+            name='leftSlider'
+            onChange={leftChange}
+            valueLabelDisplay='off'
           />
         </Box>
       </Box>
 
       <Box sx={sliderControlClass}>
-        <FormLabel>Play around with bubbles inside the dasshed ractangle.</FormLabel>
+        <FormLabel>
+          Play around with bubbles inside the dasshed ractangle.
+        </FormLabel>
       </Box>
     </Box>
   );
