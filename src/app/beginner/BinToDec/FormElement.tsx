@@ -1,20 +1,15 @@
+import * as React from 'react';
 import { useTheme } from '@emotion/react';
 import {
-  Button,
-  Chip,
   FormControl,
   FormGroup,
   FormHelperText,
   FormLabel,
   Input,
   InputAdornment,
-  InputLabel,
   Paper,
-  TextField,
   Typography,
-  buttonClasses,
 } from '@mui/material';
-import React, { useState } from 'react';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 
 const FormElement = () => {
@@ -70,7 +65,8 @@ const FormElement = () => {
   // Input handling
   const [decimal, setDecimal] = React.useState('');
   const [inputError, setBinError] = React.useState(false);
-
+  const [inputColor, setInputColor] = React.useState('primary');
+  
   // regular expression pattern to match
   // used in value.match
   // ^ - start of line anchor, $ - end of line anchor
@@ -80,8 +76,6 @@ const FormElement = () => {
 
   const updateDec = (event: any) => {
     event.preventDefault();
-    setBinError(false);
-    setDecimal('');
     const value = event.target.value;
 
     // turn red if value exists and doesnt match format
@@ -93,13 +87,19 @@ const FormElement = () => {
     // break and cleanup if input is empty
     if (value.length < 1) {
       setBinError(false);
+      setInputColor('primary');
       setDecimal('');
       return;
     }
 
+    // clear bad input style
+    setBinError(false);
+    setInputColor('success');
+
     // parseInt parses the string `value` in base 2 (binary) and converts it to a decimal (base 10) number
     // immediately stringify so setDecimal accepts the input
     const decimal = parseInt(value, 2).toString();
+    var inputSuccessColor = true;
     setDecimal(decimal);
   };
 
@@ -128,6 +128,8 @@ const FormElement = () => {
 
           <FormControl
             error={inputError}
+            color={inputColor}
+            focused={true}
             fullWidth
             variant='standard'
             sx={textFieldClass}>

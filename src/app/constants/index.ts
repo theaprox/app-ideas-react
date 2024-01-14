@@ -33,10 +33,10 @@ interface SidebarItems {
                 path: '/beginner/BinToDec',
             },
             {
-                key: 'todo',
+                key: 'borderradius',
                 level: '2',
-                label: 'TODO List',
-                path: '/#',
+                label: 'Border Radius',
+                path: '/beginner/BorderRadius',
             },
             {
                 key: 'radius',
