@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import SimpleRadius from './SimpleRadius';
+import AdvancedRadius from './AdvancedRadius';
 
 //@ts-ignore
 function TabPanel(props) {
@@ -110,7 +111,7 @@ const BorderRadius = () => {
           </TabPanel>
 
           <TabPanel value={value} index={1}>
-            Advanced controls
+            <AdvancedRadius />
           </TabPanel>
         </Box>
       </Paper>
