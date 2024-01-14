@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import SimpleSuspense from './SimpleSuspense';
 
 const FormElement = () => {
   const theme = useTheme();
@@ -106,6 +107,7 @@ const FormElement = () => {
   return (
     <>
       <Paper component='form' sx={paperClasses} elevation={8}>
+        <React.Suspense fallback={<SimpleSuspense />}>
         <FormGroup sx={formGroupClass}>
           <FormLabel sx={formLabelClass}>
             <Typography
@@ -140,9 +142,7 @@ const FormElement = () => {
               multiline
               name='binary'
               onChange={updateDec}
-              startAdornment={
-                <InputAdornment position='start'>BIN</InputAdornment>
-              }
+              startAdornment={<InputAdornment position='start'>BIN</InputAdornment>}
               inputProps={{ inputMode: 'numeric', maxLength: 69 }}
             />
             <FormHelperText id='standard-weight-helper-text'>
@@ -164,6 +164,7 @@ const FormElement = () => {
             />
           </FormControl>
         </FormGroup>
+        </React.Suspense>
       </Paper>
     </>
   );
