@@ -60,14 +60,10 @@ const AdvancedRadius = () => {
     height: 'auto',
     maxWidth: '320px',
     aspectRatio: '1/1',
-    borderTopLeftRadius: `${topValue}% ${100 - leftValue}%`,
-    borderTopRightRadius: `${100 - topValue}% ${Math.abs(-1 * rightValue)}%`,
-    borderBottomRightRadius: `${Math.abs(-1 * bottomValue)}% ${Math.abs(
-      100 - -1 * rightValue
-    )}%`,
-    borderBottomLeftRadius: `${Math.abs(
-      100 - -1 * bottomValue
-    )}% ${leftValue}%`,
+    borderTopLeftRadius: `    ${topValue}%                       ${100 - leftValue}%`,
+    borderTopRightRadius: `   ${100 - topValue}%                 ${Math.abs(rightValue)}%`,
+    borderBottomRightRadius: `${Math.abs(bottomValue)}%          ${100 - Math.abs(rightValue)}%`,
+    borderBottomLeftRadius: ` ${100 - Math.abs(bottomValue)}%    ${leftValue}%`,
     bgcolor: 'info.light',
     display: 'flex',
     alignItems: 'start',
@@ -130,10 +126,10 @@ const AdvancedRadius = () => {
   return (
     <Box component='div' sx={panelBoxClass}>
       <Box component='section' sx={interactiveBoxHolderClass}>
-        <Chip size='small' label={topValue} sx={{ width: 'auto', position: 'absolute', top:0, left:0, m:1, }}/>
-        <Chip size='small' label={Math.abs(rightValue)} sx={{ width: 'auto', position: 'absolute', top:0, right:0, m:1, }}/>
-        <Chip size='small' label={Math.abs(bottomValue)} sx={{ width: 'auto', position: 'absolute', bottom:0, right:0, m:1, }}/>
-        <Chip size='small' label={leftValue} sx={{ width: 'auto', position: 'absolute', bottom:0, left:0, m:1, }}/>
+        <Chip size='small' label={topValue + ' | ' + (100 - leftValue)} sx={{ width: 'auto', position: 'absolute', top:0, left:0, m:1, }}/>
+        <Chip size='small' label={(100 - topValue) + ' | ' + Math.abs(rightValue)} sx={{ width: 'auto', position: 'absolute', top:0, right:0, m:1, }}/>
+        <Chip size='small' label={Math.abs(bottomValue) + ' | ' + (100- Math.abs(rightValue))} sx={{ width: 'auto', position: 'absolute', bottom:0, right:0, m:1, }}/>
+        <Chip size='small' label={(100 - Math.abs(bottomValue)) + ' | ' + leftValue} sx={{ width: 'auto', position: 'absolute', bottom:0, left:0, m:1, }}/>
         <Box sx={simpleRadiusBox}>
           <Slider
             sx={topSlider}
