@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { Box, Paper, Typography } from '@mui/material';
+import * as React from 'react';
+import { Box, FormLabel, Paper, Slider, Typography } from '@mui/material';
 import BorderStyleIcon from '@mui/icons-material/BorderStyle';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
@@ -31,7 +31,8 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index: any) {
+//@ts-ignore
+function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -39,6 +40,14 @@ function a11yProps(index: any) {
 }
 
 const BorderRadius = () => {
+  const [value, setValue] = React.useState(0);
+  const [simpleRadius, setSimpleRadius] = React.useState(0);
+
+  //@ts-ignore
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   //styles
   const paperClass = {
     '&.MuiPaper-root': {
@@ -54,31 +63,6 @@ const BorderRadius = () => {
     gap: 2,
   };
 
-  const outerBoxClass = {
-    p: 8,
-    border: '1px dashed grey',
-    display: 'flex',
-    justifyContent: 'center',
-    Typography: 'body1',
-  };
-
-  const innerBoxClass = {
-    width: 2 / 3,
-    height: 'auto',
-    aspectRatio: '1/1',
-    borderRadius: 1,
-    bgcolor: 'info.light',
-    '&:hover': {
-      bgcolor: 'info.main',
-    },
-  };
-
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   const tabBoxClass = {
     borderBottom: 1,
     borderColor: 'divider',
@@ -89,6 +73,53 @@ const BorderRadius = () => {
   const tabStyleClass = {
     flexGrow: 1,
     m: 0,
+  };
+
+  const panelBoxClass = {
+    width: '100%',
+    height: 'auto',
+    aspectRatio: '1/1',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'start',
+    gap: 2,
+  };
+
+  const interactiveBoxHolderClass = {
+    width: '100%',
+    height: 'auto',
+    aspectRatio: '1/1',
+    border: '1px dashed grey',
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 1,
+    Typography: 'body1',
+    py:0,
+    m:0,
+  };
+
+  const sliderClass = {
+    maxWidth: '240px',
+  };
+
+  const simpleRadiusBox = {
+    width: 2 / 3,
+    height: 'auto',
+    aspectRatio: '1/1',
+    borderRadius: `${simpleRadius}%`,
+    bgcolor: 'info.light',
+    '&:hover': {
+      bgcolor: 'info.main',
+    },
+  }
+
+  //@ts-ignore
+  const valueText = (value) => {
+    setSimpleRadius(value);
+    return `${value}`;
   };
 
   return (
@@ -123,18 +154,45 @@ const BorderRadius = () => {
             <Tab sx={tabStyleClass} label='Simple' {...a11yProps(0)} />
             <Tab sx={tabStyleClass} label='Advanced' {...a11yProps(1)} />
           </Tabs>
+
           <CustomTabPanel value={value} index={0}>
-            Simple controls
+            <Box sx={panelBoxClass}>
+              <Box
+                sx={{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                }}>
+                <FormLabel>
+                  Simple radius adjustment.
+                </FormLabel>
+                <Slider
+                  sx={sliderClass}
+                  name='simpleRadiusSlider'
+                  aria-label='Radius'
+                  defaultValue={12}
+                  getAriaValueText={valueText}
+                  valueLabelDisplay='auto'
+                  step={1}
+                  min={0}
+                  max={50}
+                />
+              </Box>
+
+              <Box component='section' sx={interactiveBoxHolderClass}>
+                <FormLabel
+                  sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  Radius: {simpleRadius}%
+                </FormLabel>
+                <Box sx={simpleRadiusBox}></Box>
+              </Box>
+            </Box>
           </CustomTabPanel>
+
           <CustomTabPanel value={value} index={1}>
             Advanced controls
           </CustomTabPanel>
-        </Box>
-
-        <Box>
-          <Box component='section' sx={outerBoxClass}>
-            <Box sx={innerBoxClass}></Box>
-          </Box>
         </Box>
       </Paper>
     </div>
