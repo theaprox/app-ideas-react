@@ -6,9 +6,9 @@ import React from 'react';
 const AdvancedRadius = () => {
   const [radius, setRadius] = React.useState({
     top: 30,
-    right: (-40),
-    bottom: (-30),
-    left: 60,
+    right: (-30),
+    bottom: (-70),
+    left: 70,
   });
   
   //@ts-ignore

@@ -37,6 +37,12 @@ interface SidebarItems {
                 level: '2',
                 label: 'Border Radius Preview',
                 path: '/beginner/BorderRadius',
+            },
+            {
+                key: 'calculator',
+                level: '2',
+                label: 'Calculator',
+                path: '/beginner/Calculator',
             }
         ]
     }
