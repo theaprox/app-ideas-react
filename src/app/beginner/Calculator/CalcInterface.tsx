@@ -45,8 +45,13 @@ const CalcInterface = () => {
 
     // handle keypad inputs
     if (action === 'keypad' && (param || param == 0)) setInput(`${newInput}${param}`);
+    // handle comma
     if (action === 'comma' && !input.includes(',')) setInput(input + ',')
-    if (action === 'sum') {}
+
+    // handle operations
+    if (action === 'operation') {
+      
+    }
   };
 
   return (
@@ -80,12 +85,12 @@ const CalcInterface = () => {
           </CalcButton>
         </Grid>
         <Grid item xs={3}>
-          <CalcButton size='large' variant='outlined' color='info' fullWidth onClick={Calculate('inv')}>
+          <CalcButton size='large' variant='outlined' color='info' fullWidth onClick={Calculate('operation', '-1')}>
             +/-
           </CalcButton>
         </Grid>
         <Grid item xs={3}>
-          <CalcButton size='large' variant='outlined' color='info' fullWidth onClick={Calculate('per')}>
+          <CalcButton size='large' variant='outlined' color='info' fullWidth onClick={Calculate('operation', '/100')}>
             <PercentIcon sx={{ fontSize: 'inherit', }} />
           </CalcButton>
         </Grid>
@@ -106,7 +111,7 @@ const CalcInterface = () => {
           </CalcButton>
         </Grid>
         <Grid item xs={3}>
-          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('div')}>
+          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('operation', '/')}>
             /
           </CalcButton>
         </Grid>
@@ -127,7 +132,7 @@ const CalcInterface = () => {
           </CalcButton>
         </Grid>
         <Grid item xs={3}>
-          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('mul')}>
+          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('operation', '*')}>
             <CloseIcon sx={{ fontSize: 'inherit', }}/>
           </CalcButton>
         </Grid>
@@ -160,7 +165,7 @@ const CalcInterface = () => {
           </CalcButton>
         </Grid>
         <Grid item xs={3}>
-          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('sub')}>
+          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('operation', '-')}>
             <RemoveIcon sx={{ fontSize: 'inherit', }} />
           </CalcButton>
         </Grid>
@@ -184,7 +189,7 @@ const CalcInterface = () => {
           </CalcButton>
         </Grid>
         <Grid item xs={3}>
-          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('add')}>
+          <CalcButton size='large' variant='outlined' color='warning' fullWidth onClick={Calculate('operation', '+')}>
             +
           </CalcButton>
         </Grid>
