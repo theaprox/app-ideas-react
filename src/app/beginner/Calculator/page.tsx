@@ -13,7 +13,7 @@ const paperClass = {
   justifyContent: 'center',
   width: 2 / 3,
   maxWidth: 'md',
-  padding: 2,
+  p: 2,
   gap: 2,
 };
 

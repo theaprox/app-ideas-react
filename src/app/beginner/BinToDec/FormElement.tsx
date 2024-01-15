@@ -14,7 +14,6 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SimpleSuspense from './SimpleSuspense';
 
 const FormElement = () => {
-  const theme = useTheme();
   //CLASSES
   const paperClasses = {
     '&.MuiPaper-root': {
