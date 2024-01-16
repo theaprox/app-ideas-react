@@ -45,7 +45,13 @@ interface SidebarItems {
                 path: '/beginner/Calculator',
             }
         ]
-    }
+    },
+    {
+        key: 'testpage',
+        level: '1',
+        label: 'TestPage',
+        path: '/TestPage',
+    },
     // More items...
   ];
   

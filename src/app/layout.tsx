@@ -4,10 +4,12 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Inter } from 'next/font/google';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
+import '@fontsource/roboto/100.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import '@fontsource/roboto/900.css';
 import theme from './theme';
 import './globals.css';
 

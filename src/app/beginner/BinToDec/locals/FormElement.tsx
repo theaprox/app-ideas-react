@@ -1,32 +1,17 @@
+'use client';
 import * as React from 'react';
-import { useTheme } from '@emotion/react';
 import {
+  Box,
   FormControl,
   FormGroup,
   FormHelperText,
-  FormLabel,
   Input,
   InputAdornment,
-  Paper,
   Typography,
 } from '@mui/material';
-import PsychologyIcon from '@mui/icons-material/Psychology';
-import SimpleSuspense from './SimpleSuspense';
 
 const FormElement = () => {
   //CLASSES
-  const paperClasses = {
-    '&.MuiPaper-root': {
-      backgroundImage: 'unset',
-      backgroundColor: '#202025',
-    },
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    width: 2 / 3,
-    maxWidth: 'md',
-    padding: 2,
-  };
 
   const formGroupClass = {
     display: 'flex',
@@ -40,24 +25,6 @@ const FormElement = () => {
     },
   };
 
-  const formLabelClass = {
-    fontSize: '1em',
-    display: 'flex',
-    flexDirection: 'column',
-    fontWeight: 'light',
-    gap: 0,
-  };
-
-  const typographyOverline = {
-    p: 0,
-    m: 0,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'start',
-    gap: 1,
-  };
-
   const textFieldClass = {
     width: '100%',
   };
@@ -66,7 +33,7 @@ const FormElement = () => {
   const [decimal, setDecimal] = React.useState('');
   const [inputError, setBinError] = React.useState(false);
   const [inputColor, setInputColor] = React.useState(false);
-  
+
   // regular expression pattern to match
   // used in value.match
   // ^ - start of line anchor, $ - end of line anchor
@@ -105,31 +72,11 @@ const FormElement = () => {
 
   return (
     <>
-      <Paper component='form' sx={paperClasses} elevation={8}>
-        <React.Suspense fallback={<SimpleSuspense />}>
-        <FormGroup sx={formGroupClass}>
-          <FormLabel sx={formLabelClass}>
-            <Typography
-              variant='h5'
-              sx={{
-                textTransform: 'uppercase',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 1,
-              }}
-              gutterBottom>
-              <PsychologyIcon />
-              BIN to DEC
-            </Typography>
-            <Typography variant='subtitle1' gutterBottom>
-              Maximum allowed binary number input length is 69 (nice!) digits.
-            </Typography>
-          </FormLabel>
 
+        <FormGroup sx={formGroupClass}>
           <FormControl
             error={inputError}
-            color={(inputColor ? 'success' : 'primary')}
+            color={inputColor ? 'success' : 'primary'}
             focused={true}
             fullWidth
             variant='standard'
@@ -143,6 +90,7 @@ const FormElement = () => {
               onChange={updateDec}
               startAdornment={<InputAdornment position='start'>BIN</InputAdornment>}
               inputProps={{ inputMode: 'numeric', maxLength: 69 }}
+              sx={{minHeight: '2em',}}
             />
             <FormHelperText id='standard-weight-helper-text'>
               Only 1s and 0s allowrd
@@ -163,8 +111,6 @@ const FormElement = () => {
             />
           </FormControl>
         </FormGroup>
-        </React.Suspense>
-      </Paper>
     </>
   );
 };

@@ -1,13 +1,25 @@
-'use client';
+
 import React from 'react';
-import FormElement from './FormElement';
+import FormElement from './locals/FormElement';
+import SimpleTitle from '@/app/components/SimpleTitle';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import PaperWrapper from '@/app/components/PaperWrapper';
+import ContentHolder from '@/app/components/ContentHolder';
+
+const appname = 'BIN to DEC';
+const appsubtitle = 'Input Binary numbers to convert to Decimal';
+const apptitleicon = <PsychologyIcon />;
+
 
 const BinToDec = () => {
-    return (
-        <div className='tw-flex-1 tw-grow tw-flex tw-flex-col tw-items-center tw-pt-24'>
-            <FormElement />
-        </div>
-    );
+  return (
+    <ContentHolder>
+        <SimpleTitle title={appname} subtitle={appsubtitle} icon={apptitleicon} />
+        <PaperWrapper>
+          <FormElement />
+        </PaperWrapper>
+    </ContentHolder>        
+  );
 };
 
 export default BinToDec;
