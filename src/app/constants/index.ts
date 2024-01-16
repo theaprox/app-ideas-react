@@ -80,3 +80,18 @@ interface SidebarItems {
       faIcon: 'faXTwitter',
     }
   ];
+
+
+export const paperClass = {
+  '&.MuiPaper-root': {
+    backgroundImage: 'unset',
+    backgroundColor: '#202025',
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  width: 2 / 3,
+  maxWidth: 'md',
+  p: 2,
+  gap: 2,
+};
