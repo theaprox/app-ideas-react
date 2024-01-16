@@ -1,5 +1,5 @@
 'use client';
-import * as React from 'react';
+import React from 'react';
 import { Box, Button, Typography, styled } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CloseIcon from '@mui/icons-material/Close';

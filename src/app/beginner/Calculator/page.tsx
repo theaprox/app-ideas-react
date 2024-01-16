@@ -1,5 +1,5 @@
-import { Box, Paper, Typography } from '@mui/material';
 import React from 'react';
+import { Box, Paper, Typography } from '@mui/material';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import CalcInterface from './CalcInterface';
 
