@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import {
-  DocumentHeadTags,
-  AppCacheProvider,
-  documentGetInitialProps,
-} from '@mui/material-nextjs/v14-pagesRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import { Inter } from 'next/font/google';
 import Footer from './components/Footer';
@@ -15,7 +10,6 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import theme from './theme';
 import './globals.css';
-import { Breadcrumbs } from '@mui/material';
 
 const inter = Inter({ subsets: ['latin'] });
 

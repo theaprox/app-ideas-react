@@ -1,18 +1,23 @@
-import { Box, Paper } from '@mui/material';
-import { paperClass } from '@/app/constants';
+import React from 'react';
 import CalculateIcon from '@mui/icons-material/Calculate';
-import PaperCardTitle from '../PaperCardTitle';
+import SimpleTitle from '@/app/components/SimpleTitle';
+import ContentHolder from '@/app/components/ContentHolder';
+import PaperWrapper from '@/app/components/PaperWrapper';
+import CalculatorInterface from './CalculatorInterface';
+
+const appname = 'Calculator';
+const appsubtitle = 'Simple Calculator';
+const apptitleicon = <CalculateIcon />;
+
 
 const CalculatorApp = () => {
   return (
-    <div className='tw-flex-1 tw-grow tw-flex tw-flex-col tw-items-center tw-pt-24'>
-      <Paper component='form' sx={paperClass} elevation={8}>
-        <PaperCardTitle text='Calculator' icon={<CalculateIcon />} />
-        <Box>
-
-        </Box>
-      </Paper>
-    </div>
+    <ContentHolder>
+      <SimpleTitle title={appname} subtitle={appsubtitle} icon={apptitleicon} />
+      <PaperWrapper>
+        <CalculatorInterface />
+      </PaperWrapper>
+    </ContentHolder>
   );
 };
 

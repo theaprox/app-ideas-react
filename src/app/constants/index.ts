@@ -45,7 +45,13 @@ interface SidebarItems {
                 path: '/beginner/Calculator',
             }
         ]
-    }
+    },
+    {
+        key: 'testpage',
+        level: '1',
+        label: 'TestPage',
+        path: '/TestPage',
+    },
     // More items...
   ];
   
@@ -80,18 +86,3 @@ interface SidebarItems {
       faIcon: 'faXTwitter',
     }
   ];
-
-
-export const paperClass = {
-  '&.MuiPaper-root': {
-    backgroundImage: 'unset',
-    backgroundColor: '#202025',
-  },
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  width: 2 / 3,
-  maxWidth: 'md',
-  p: 2,
-  gap: 2,
-};
