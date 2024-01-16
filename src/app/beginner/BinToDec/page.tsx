@@ -1,6 +1,6 @@
 
 import React from 'react';
-import FormElement from './FormElement';
+import FormElement from './locals/FormElement';
 import SimpleTitle from '@/app/components/SimpleTitle';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import PaperWrapper from '@/app/components/PaperWrapper';

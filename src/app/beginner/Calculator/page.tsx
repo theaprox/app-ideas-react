@@ -2,8 +2,8 @@ import React from 'react';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import SimpleTitle from '@/app/components/SimpleTitle';
 import ContentHolder from '@/app/components/ContentHolder';
-import PaperWrapper from '@/app/components/PaperWrapper';
-import CalculatorInterface from './CalculatorInterface';
+import CalculatorInterface from './locals/CalculatorInterface';
+import CalculatorWrapper from './locals/CalculatorWrapper';
 
 const appname = 'Calculator';
 const appsubtitle = 'Simple Calculator';
@@ -14,9 +14,9 @@ const CalculatorApp = () => {
   return (
     <ContentHolder>
       <SimpleTitle title={appname} subtitle={appsubtitle} icon={apptitleicon} />
-      <PaperWrapper>
+      <CalculatorWrapper>
         <CalculatorInterface />
-      </PaperWrapper>
+      </CalculatorWrapper>
     </ContentHolder>
   );
 };

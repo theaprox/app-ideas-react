@@ -3,7 +3,7 @@ import SimpleTitle from '../../components/SimpleTitle';
 import ContentHolder from '@/app/components/ContentHolder';
 import PaperWrapper from '@/app/components/PaperWrapper';
 import BorderStyleIcon from '@mui/icons-material/BorderStyle';
-import ContentTabs from './ContentTabs';
+import ContentTabs from './locals/ContentTabs';
 
 const appname = 'Border Radius';
 const appsubtitle = 'Adjust box border radius';
