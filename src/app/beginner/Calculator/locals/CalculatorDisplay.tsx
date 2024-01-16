@@ -10,13 +10,14 @@ const CalculatorDisplay: React.FC<DisplayProps> = ({ value }) => {
     position: 'relative',
     width: 'auto',
     fontSize: '3em',
-    fontWeight: '800',
+    fontWeight: '600',
     lineHeight: '1.618em',
     height: '1.618em',
     overflow: 'hidden',
     borderBottom: '4px solid',
     borderColor: 'primary.dark',
     whiteSpace: 'nowrap',
+    fontSmoothing: 'always',
     pt: 2,
   };
   const childBoxClass = {

@@ -3,7 +3,14 @@ import Box from '@mui/material/Box';
 import CalculatorDisplay from './CalculatorDisplay';
 import Grid from '@mui/material/Unstable_Grid2';
 import Button from '@mui/material/Button';
+// ICONS
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import CloseIcon from '@mui/icons-material/Close';
+import RemoveIcon from '@mui/icons-material/Remove';
+import IsoIcon from '@mui/icons-material/Iso';
+import AddIcon from '@mui/icons-material/Add';
+import BoltIcon from '@mui/icons-material/Bolt';
+import LayersClearIcon from '@mui/icons-material/LayersClear';
 
 const CalculatorInterface = () => {
   const input = '0';
@@ -15,27 +22,32 @@ const CalculatorInterface = () => {
         sx={{
           '& button': {
             fontSize: '1.1618em',
+            fontWeight: '300',
             borderRadius: 0,
             width: '100%',
             height: '100%',
             p: 2,
+            boxShadow: 'none',
             '*': { fontSize: 'inherit' },
+          },
+          '& button:hover': {
+            boxShadow: 1,
           },
         }}>
         <Grid container spacing={0}>
           <Grid xs={3}>
-            <Button variant='text' color='warning' size='small'>
-              C
+            <Button variant='contained' color='secondary' size='small'>
+              <LayersClearIcon />
             </Button>
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
-              %
+              <CloseIcon />
             </Button>
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
-              +/-
+              /
             </Button>
           </Grid>
           <Grid xs={3}>
@@ -61,7 +73,7 @@ const CalculatorInterface = () => {
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
-              /
+              <RemoveIcon />
             </Button>
           </Grid>
 
@@ -82,7 +94,7 @@ const CalculatorInterface = () => {
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
-              x
+              <AddIcon />
             </Button>
           </Grid>
 
@@ -103,11 +115,14 @@ const CalculatorInterface = () => {
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
-              -
+              <IsoIcon />
             </Button>
           </Grid>
 
           <Grid xs={3}>
+            <Button variant='text' color='info' size='small'>
+              %
+            </Button>
           </Grid>
           <Grid xs={3}>
             <Button variant='text' size='small'>
@@ -120,8 +135,8 @@ const CalculatorInterface = () => {
             </Button>
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              +
+            <Button variant='contained' color='info' size='small'>
+              <BoltIcon />
             </Button>
           </Grid>
         </Grid>
