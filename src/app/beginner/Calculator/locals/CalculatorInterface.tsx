@@ -39,7 +39,7 @@ function reducer(state, {type, value}){
       return { ...state, input: state.input.slice(0, -1) }
 
     case ACTIONS.KEYPAD:
-      if ( value === '0' && (state.input === '0' || !state.input.includes('.')) ) { // guard from multiple zeroes '0'
+      if ( value === '0' && (state.input === '0' && !state.input.includes('.')) ) { // guard from multiple zeroes '0'
         return state
       } 
       if (value === '.' && state.input.includes('.')) { // guard from multiple commas '.'
@@ -53,6 +53,10 @@ function reducer(state, {type, value}){
         input: `${state.input || ''}${value}`,
       }
     
+    case ACTIONS.PERCENT:
+      if (state.input === '0') { return state }
+      return { ...state, input: `${state.input / 100}` }
+
     default: state // unrecognized or invalid calls return state
     }
 }
@@ -116,7 +120,7 @@ const CalculatorInterface = () => {
           </Grid>
           <Grid xs={3}>
             <CalculatorButton symbol='5' action={ACTIONS.KEYPAD} dispatch={dispatch} />
-          </Grid>
+          </Grid>          
           <Grid xs={3}>
             <CalculatorButton symbol='6' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
