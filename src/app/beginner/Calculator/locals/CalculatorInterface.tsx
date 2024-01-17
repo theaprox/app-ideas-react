@@ -73,7 +73,7 @@ function reducer(state, { type, value }) {
       return { ...state, input: `${state.input * -1}` }; // dynamic invertion by multiplication
 
     case ACTIONS.OPERATION:
-      if (!state.memory && !state.operation){
+      if (!state.memory && !state.operation && state.input){
         return {
           ...state,
           operation: value,
@@ -81,11 +81,31 @@ function reducer(state, { type, value }) {
           input: '0',
         }
       }
+
+      if (state.memory && state.operation && state.input === '0') {
+        return {
+          ...state,
+          operation: value,
+          memory: state.memory,
+          input: state.input,
+        }
+      }
       return {
         ...state,
         memory: calculate(state),
         operation: value,
         input: '0'
+      }
+    
+    case ACTIONS.EQUAL:
+      if(state.operation === '' || state.memory == '' || state.input === '0') {
+        return state
+      }
+      return {
+        ...state,
+        operation: '',
+        memory: '',
+        input: calculate(state),
       }
 
     default:
