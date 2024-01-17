@@ -33,6 +33,12 @@ function reducer(state, { type, value }) {
       return { ...state, input: '0', memory: '', operation: '' }; // handle clear (AC)
 
     case ACTIONS.BACKSPACE:
+      if(state.overwrite) {
+        return {
+          ...state,
+          input: '0'
+        }
+      }
       if ((state.input.length <= 2 && state.memory && state.input.includes('-')) || (state.input.length <= 1 && state.memory)) {
         return { ...state, input: state.memory, operation: '', memory: ''}
       }
@@ -43,6 +49,13 @@ function reducer(state, { type, value }) {
       return { ...state, input: state.input.slice(0, -1) };
 
     case ACTIONS.KEYPAD:
+      if (state.overwrite) {
+        return {
+          ...state,
+          input: value,
+          overwrite: false
+        }
+      }
       if (value === '0' && state.input === '0' && !state.input.includes('.')) {
         // guard from multiple zeroes '0'
         return state;
@@ -98,7 +111,7 @@ function reducer(state, { type, value }) {
       }
     
     case ACTIONS.EQUAL:
-      if(state.operation === '' || state.memory == '' || state.input === '0') {
+      if(state.operation === '' || state.memory == '') {
         return state
       }
       return {
@@ -106,6 +119,7 @@ function reducer(state, { type, value }) {
         operation: '',
         memory: '',
         input: calculate(state),
+        overwrite: true,
       }
 
     default:
@@ -115,22 +129,27 @@ function reducer(state, { type, value }) {
 
 //@ts-ignore
 function calculate({input, memory, operation}) {
-  const first = memory
-  const second = input
-  if(isNaN(first) || isNaN(second)) return
+  const first = parseFloat(memory)
+  const second = parseFloat(input)
+  if(isNaN(first) || isNaN(second)) {
+    return('NaN')
+  }
   let result
   switch (operation) {
     case '+':
-      result = Number(first) + Number(second)
+      result = first + second
       break
     case '-':
-      result = Number(first) - Number(second)
+      result = first - second
       break
     case 'x':
-      result = Number(first) * Number(second)
+      result = first * second
       break
     case '/':
-      result = Number(first) / Number(second)
+      if(first === 0 || second === 0) {
+        return('#DIV/0!')
+      }
+      result = first / second
       break
     default: return ''  
   }
@@ -155,10 +174,7 @@ const CalculatorInterface = () => {
   };
 
   //@ts-ignore
-  const [{ input, memory, operation }, dispatch] = useReducer(reducer, {
-    input: '0',
-    memory: '',
-  });
+  const [{ input, memory, operation, overwrite }, dispatch] = useReducer(reducer, { input: '0', overwrite: false});
 
   return (
     <>
