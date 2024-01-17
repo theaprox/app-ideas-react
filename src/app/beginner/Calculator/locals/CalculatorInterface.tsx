@@ -33,11 +33,11 @@ function reducer(state, {type, value}){
       return { ...state, input: '0', memory: '' } // handle clear (AC)
 
     case ACTIONS.BACKSPACE:
-      if(state.input.length <= 1 && state.memory) { // reset to 0 after last digit is erased
+      if(state.input.length <= 1 && state.memory) { // set input to memory
         state.memory = '' //clear memory
         return { ...state, input: state.memory } // write memory to input
       }
-      if(state.input.length <= 1 && !state.memory) { // reset to 0 after last digit is erased
+      if(state.input.length <= 1 && !state.memory) { // reset to 0 if no memory present
         return { ...state, input: '0' }
       }
       return { ...state, input: state.input.slice(0, -1) }
@@ -61,6 +61,9 @@ function reducer(state, {type, value}){
       if (state.input === '0') { return state }
       return { ...state, input: `${state.input / 100}` }
 
+    case ACTIONS.INVERT:
+      if (state.input === '0') { return state } // dont invert 0
+      return {...state, input: `${(state.input)*(-1)}` } // dynamic invertion by multiplication
     default: state // unrecognized or invalid calls return state
     }
 }
