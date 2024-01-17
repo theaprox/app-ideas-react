@@ -28,6 +28,14 @@ export const ACTIONS = {
 function reducer(state, { type, value }) {
   const natural: RegExp = /^[1-9]+$/g; // define natural single digit nmumbers
   if (state.input === '') state.input = '0'; // fix empty input string pre-swithc
+  if (isNaN(Number(state.input)) || isNaN(Number(state.memory))) {
+    return {
+      ...state,
+      input: '0',
+      memory: '',
+      operation: '',
+    }
+  }
   switch (type) {
     case ACTIONS.CLEAR:
       return { ...state, input: '0', memory: '', operation: '' }; // handle clear (AC)
@@ -65,7 +73,6 @@ function reducer(state, { type, value }) {
         return state;
       }
       if (value.match(natural) && state.input === '0') {
-        // handle default '0' state for number inputs
         state.input = '';
       }
       return {
