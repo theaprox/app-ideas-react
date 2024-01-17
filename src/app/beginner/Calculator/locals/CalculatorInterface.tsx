@@ -26,34 +26,43 @@ export const ACTIONS = {
 
 //@ts-ignore
 function reducer(state, { type, value }) {
-
-  const natural: RegExp = /^[1-9]+$/g; // define natural single digit nmumbers
-  if (state.input === '') state.input = '0'; // fix empty input string pre-switch
-  if (isNaN(Number(state.input)) || isNaN(Number(state.memory))) {
-    return {
-      ...state,
-      input: '0',
-      memory: '',
-      operation: '',
+  const natural: RegExp = /^[1-9]+$/g;
+  if (state.input === '') state.input = '0';
+  if (
+    isNaN(parseFloat(state.input)) ||
+    (state.memory && isNaN(parseFloat(state.memory)))
+  ) {
+    switch (type) {
+      case ACTIONS.KEYPAD: state.input = value
+      default: state.input = '0'
     }
   }
 
   switch (type) {
-
     case ACTIONS.CLEAR:
-      return { ...state, input: '0', memory: '', operation: '' }; // handle clear (AC)
+      return { ...state, input: '0', memory: '', operation: '' }; 
 
     case ACTIONS.BACKSPACE:
-      if(state.overwrite) {
+      if (state.overwrite) {
         return {
           ...state,
-          input: '0'
-        }
+          input: '0',
+        };
       }
-      if ((state.input.length <= 2 && state.memory && state.input.includes('-')) || (state.input.length <= 1 && state.memory)) {
-        return { ...state, input: state.memory, operation: '', memory: ''}
+      if (
+        (state.input.length <= 2 &&
+          state.memory &&
+          state.input.includes('-')) ||
+        (state.input.length <= 1 && state.memory)
+      ) {
+        return { ...state, input: state.memory, operation: '', memory: '' };
       }
-      if ((state.input.length <= 2 && !state.memory && state.input.includes('-')) || (state.input.length <= 1 && !state.memory)) {
+      if (
+        (state.input.length <= 2 &&
+          !state.memory &&
+          state.input.includes('-')) ||
+        (state.input.length <= 1 && !state.memory)
+      ) {
         return { ...state, input: '0' };
       }
       return { ...state, input: state.input.slice(0, -1) };
@@ -63,23 +72,21 @@ function reducer(state, { type, value }) {
         return {
           ...state,
           input: value,
-          overwrite: false
-        }
+          overwrite: false,
+        };
       }
       if (value === '0' && state.input === '0' && !state.input.includes('.')) {
-        // guard from multiple zeroes '0'
         return state;
       }
       if (value === '.' && state.input.includes('.')) {
-        // guard from multiple commas '.'
         return state;
       }
       if (value.match(natural) && state.input === '0') {
-        state.input = '';
+        return { ...state, input: value };
       }
       return {
         ...state,
-        input: `${state.input || ''}${value}`,
+        input: `${state.input}${value}`,
       };
 
     case ACTIONS.PERCENT:
@@ -95,13 +102,13 @@ function reducer(state, { type, value }) {
       return { ...state, input: `${state.input * -1}` }; // dynamic invertion by multiplication
 
     case ACTIONS.OPERATION:
-      if (!state.memory && !state.operation && state.input){
+      if (!state.memory && !state.operation && state.input) {
         return {
           ...state,
           operation: value,
           memory: state.input,
           input: '0',
-        }
+        };
       }
       if (state.memory && state.operation && state.input === '0') {
         return {
@@ -109,18 +116,18 @@ function reducer(state, { type, value }) {
           operation: value,
           memory: state.memory,
           input: state.input,
-        }
+        };
       }
       return {
         ...state,
         memory: calculate(state),
         operation: value,
-        input: '0'
-      }
-    
+        input: '0',
+      };
+
     case ACTIONS.EQUAL:
-      if(state.operation === '' || state.memory == '') {
-        return state
+      if (state.operation === '' || state.memory == '') {
+        return state;
       }
       return {
         ...state,
@@ -128,7 +135,7 @@ function reducer(state, { type, value }) {
         memory: '',
         input: calculate(state),
         overwrite: true,
-      }
+      };
 
     default:
       state; // unrecognized or invalid calls return state
@@ -136,47 +143,60 @@ function reducer(state, { type, value }) {
 }
 
 //@ts-ignore
-function calculate({input, memory, operation}) {
-  const first = parseFloat(memory)
-  const second = parseFloat(input)
-  if(isNaN(first) || isNaN(second)) {
-    return('NaN')
+function calculate({ input, memory, operation }) {
+  const first = parseFloat(memory);
+  const second = parseFloat(input);
+  if (isNaN(first) || isNaN(second)) {
+    return 'NaN';
   }
-  let result
+  let result;
   switch (operation) {
     case '+':
-      result = first + second
-      break
+      result = first + second;
+      break;
     case '-':
-      result = first - second
-      break
+      result = first - second;
+      break;
     case 'x':
-      result = first * second
-      break
+      result = first * second;
+      break;
     case '/':
-      if(first === 0 || second === 0) {
-        return('#DIV/0!')
+      if (first === 0 || second === 0) {
+        return '#DIV/0!';
       }
-      result = first / second
-      break
-    default: return ''  
+      result = first / second;
+      break;
+    default:
+      return '';
   }
-  return result.toString()
+  return result.toString();
 }
 
 const INTEGER_FORMATTING = new Intl.NumberFormat('en-us', {
   maximumFractionDigits: 0,
-})
+});
 
 //@ts-ignore
-function prettifyNumerator(numbas){
-  if (numbas == null || numbas == '') return
-  const [integers, decimals] = numbas.split('.')
-  if(decimals == null)
-    return INTEGER_FORMATTING.format(integers).replace(/,/g, ' ')
-  return `${INTEGER_FORMATTING.format(integers).replace(/,/g, ' ')}.${decimals}`
-}
+function prettifyNumerator(numbas) {
+  if (numbas == null || numbas == '') return numbas;
+  if (isNaN(parseFloat(numbas)) || isNaN(Number(numbas)) || isNaN(numbas))
+    return numbas;
 
+  let [integers, decimals] = numbas.split('.');
+
+  if (decimals) {
+    // Round the decimals to 3 places
+    if (decimals.length > 3) {
+      decimals = parseFloat('0.' + decimals)
+        .toFixed(3)
+        .split('.')[1];
+    }
+  }
+
+  return decimals
+    ? `${INTEGER_FORMATTING.format(integers).replace(/,/g, ' ')}.${decimals}`
+    : INTEGER_FORMATTING.format(integers).replace(/,/g, ' ');
+}
 
 // CLASSES FOR STYLING STUFF
 const CalculatorInterface = () => {
@@ -197,11 +217,18 @@ const CalculatorInterface = () => {
   };
 
   //@ts-ignore
-  const [{ input, memory, operation, overwrite }, dispatch] = useReducer(reducer, { input: '0', overwrite: false});
+  const [{ input, memory, operation, overwrite }, dispatch] = useReducer(
+    reducer,
+    { input: '0', overwrite: false }
+  );
 
   return (
     <>
-      <CalculatorDisplay input={prettifyNumerator(input)} memory={prettifyNumerator(memory)} operation={operation} />
+      <CalculatorDisplay
+        input={prettifyNumerator(input)}
+        memory={prettifyNumerator(memory)}
+        operation={operation}
+      />
       <Box sx={btnBoxClass}>
         <Grid container spacing={0}>
           <Grid xs={3}>
