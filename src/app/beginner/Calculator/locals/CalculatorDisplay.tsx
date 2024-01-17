@@ -4,9 +4,10 @@ import React from 'react';
 type DisplayProps = {
   input?: string;
   memory?: string;
+  operation?: string;
 };
 
-const CalculatorDisplay: React.FC<DisplayProps> = ({ input, memory }) => {
+const CalculatorDisplay: React.FC<DisplayProps> = ({ input, memory, operation }) => {
   const parentBoxClass = {
     position: 'relative',
     width: 'auto',
@@ -62,7 +63,7 @@ const CalculatorDisplay: React.FC<DisplayProps> = ({ input, memory }) => {
         <div className='tw-absolute tw-top-0 tw-left-0 tw-h-full tw-w-4 tw-bg-gradient-to-r tw-from-fade-black-100 tw-to-transparent tw-z-10'></div>
         <Box component='div' sx={childBoxClass}>
           <span className='infinite'>
-            <span className='memory'>{memory}</span>
+            <span className='memory'>{memory}{operation}</span>
             <span className='input'>{input}</span>
           </span>
         </Box>
