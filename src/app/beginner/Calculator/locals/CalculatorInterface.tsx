@@ -33,7 +33,11 @@ function reducer(state, {type, value}){
       return { ...state, input: '0', memory: '' } // handle clear (AC)
 
     case ACTIONS.BACKSPACE:
-      if(state.input.length <= 1) { // reset to 0 after last digit is erased
+      if(state.input.length <= 1 && state.memory) { // reset to 0 after last digit is erased
+        state.memory = '' //clear memory
+        return { ...state, input: state.memory } // write memory to input
+      }
+      if(state.input.length <= 1 && !state.memory) { // reset to 0 after last digit is erased
         return { ...state, input: '0' }
       }
       return { ...state, input: state.input.slice(0, -1) }
@@ -80,12 +84,12 @@ const CalculatorInterface = () => {
   }
 
   //@ts-ignore
-  const [{input, memory, operation}, dispatch] = useReducer(reducer, { input: '0'})
+  const [{input, memory, operation}, dispatch] = useReducer(reducer, { input: '0', memory: ''})
 
 
   return (
     <>
-      <CalculatorDisplay value={input} />
+      <CalculatorDisplay input={input} memory={memory} />
       <Box
         sx={btnBoxClass}>
         <Grid container spacing={0}>
