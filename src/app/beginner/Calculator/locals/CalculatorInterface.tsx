@@ -30,16 +30,16 @@ function reducer(state, { type, value }) {
   if (state.input === '') state.input = '0'; // fix empty input string pre-swithc
   switch (type) {
     case ACTIONS.CLEAR:
-      return { ...state, input: '0', memory: '' }; // handle clear (AC)
+      return { ...state, input: '0', memory: '', operation: '' }; // handle clear (AC)
 
     case ACTIONS.BACKSPACE:
-      if (state.input.length <= 1 && state.memory) {
+      if ((state.input.length <= 2 && state.memory && state.input.includes('-')) || (state.input.length <= 1 && state.memory)) {
         return { ...state, input: state.memory, operation: '', memory: ''}
       }
-      if (state.input.length <= 1 && !state.memory) {
-        // reset to 0 if no memory present
+      if ((state.input.length <= 2 && !state.memory && state.input.includes('-')) || (state.input.length <= 1 && !state.memory)) {
         return { ...state, input: '0' };
       }
+
       return { ...state, input: state.input.slice(0, -1) };
 
     case ACTIONS.KEYPAD:
@@ -73,15 +73,48 @@ function reducer(state, { type, value }) {
       return { ...state, input: `${state.input * -1}` }; // dynamic invertion by multiplication
 
     case ACTIONS.OPERATION:
+      if (!state.memory && !state.operation){
+        return {
+          ...state,
+          operation: value,
+          memory: state.input,
+          input: '0',
+        }
+      }
       return {
         ...state,
+        memory: calculate(state),
         operation: value,
-        memory: state.input,
-        input: '0',
+        input: '0'
       }
+
     default:
       state; // unrecognized or invalid calls return state
   }
+}
+
+//@ts-ignore
+function calculate({input, memory, operation}) {
+  const first = memory
+  const second = input
+  if(isNaN(first) || isNaN(second)) return
+  let result
+  switch (operation) {
+    case '+':
+      result = Number(first) + Number(second)
+      break
+    case '-':
+      result = Number(first) - Number(second)
+      break
+    case 'x':
+      result = Number(first) * Number(second)
+      break
+    case '/':
+      result = Number(first) / Number(second)
+      break
+    default: return ''  
+  }
+  return result.toString()
 }
 
 const CalculatorInterface = () => {
