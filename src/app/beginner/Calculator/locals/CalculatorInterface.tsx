@@ -1,6 +1,8 @@
-import * as React from 'react';
+'use client'
+import React, { useReducer } from 'react';
 import Box from '@mui/material/Box';
 import CalculatorDisplay from './CalculatorDisplay';
+import CalculatorButton from './CalculatorButton';
 import Grid from '@mui/material/Unstable_Grid2';
 import Button from '@mui/material/Button';
 // ICONS
@@ -12,33 +14,80 @@ import AddIcon from '@mui/icons-material/Add';
 import BoltIcon from '@mui/icons-material/Bolt';
 import LayersClearIcon from '@mui/icons-material/LayersClear';
 
+export const ACTIONS = {
+  CLEAR: 'CLEAR',
+  BACKSPACE: 'BACKSPACE',
+  EQUAL: 'EQUAL',
+  KEYPAD: 'KEYPAD',
+  OPERATION: 'OPERATION',
+  INVERT: 'INVERT',
+}
+
+//@ts-ignore
+function reducer(state, {type, value}){
+  const natural: RegExp = /^[1-9]+$/g; // define natural single digit nmumbers
+  switch(type){
+
+    case ACTIONS.CLEAR:
+      return {
+        input: '0'
+      }
+
+    case ACTIONS.BACKSPACE:
+      if(state.input.length <= 1) { // reset to 0 after last digit clear
+        return { ...state, input: '0' }
+      }
+      return { ...state, input: state.input.slice(0, -1) }
+
+    case ACTIONS.KEYPAD:
+      if ( value === '0' && (state.input === '0' || !state.input.includes('.')) ) { // guard from multiple zeroes '0'
+        return state
+      } 
+      if (value === '.' && state.input.includes('.')) { // guard from multiple commas '.'
+        return state
+      } 
+      if (value.match(natural) && state.input === '0') { // handle default '0' state for number inputs
+        state.input = ''
+      }
+      return {
+        ...state,
+        input: `${state.input || ''}${value}`,
+      }
+    
+    default: state // unrecognized or invalid calls return state
+    }
+}
+
 const CalculatorInterface = () => {
-  const input = '0';
+
+  const btnBoxClass = {
+    '& button': {
+      fontSize: '1.1618em',
+      fontWeight: '300',
+      borderRadius: 0,
+      width: '100%',
+      height: '100%',
+      p: 2,
+      boxShadow: 'none',
+      '*': { fontSize: 'inherit' },
+    },
+    '& button:hover': {
+      boxShadow: 1,
+    },
+  }
+
+  //@ts-ignore
+  const [{input, memory, operation}, dispatch] = useReducer(reducer, { input: '0'})
+
 
   return (
     <>
       <CalculatorDisplay value={input} />
       <Box
-        sx={{
-          '& button': {
-            fontSize: '1.1618em',
-            fontWeight: '300',
-            borderRadius: 0,
-            width: '100%',
-            height: '100%',
-            p: 2,
-            boxShadow: 'none',
-            '*': { fontSize: 'inherit' },
-          },
-          '& button:hover': {
-            boxShadow: 1,
-          },
-        }}>
+        sx={btnBoxClass}>
         <Grid container spacing={0}>
           <Grid xs={3}>
-            <Button variant='contained' color='secondary' size='small'>
-              <LayersClearIcon />
-            </Button>
+            <CalculatorButton action={ACTIONS.CLEAR} icon={<LayersClearIcon />} variant='contained' color='secondary' dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
@@ -51,25 +100,17 @@ const CalculatorInterface = () => {
             </Button>
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              <BackspaceIcon />
-            </Button>
+            <CalculatorButton action={ACTIONS.BACKSPACE} icon={<BackspaceIcon />} color='info' dispatch={dispatch} />
           </Grid>
 
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              7
-            </Button>
+            <CalculatorButton symbol='7' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              8
-            </Button>
+            <CalculatorButton symbol='8' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              9
-            </Button>
+            <CalculatorButton symbol='9' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
@@ -78,19 +119,13 @@ const CalculatorInterface = () => {
           </Grid>
 
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              4
-            </Button>
+            <CalculatorButton symbol='4' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              5
-            </Button>
+            <CalculatorButton symbol='5' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              6
-            </Button>
+            <CalculatorButton symbol='6' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
@@ -99,20 +134,17 @@ const CalculatorInterface = () => {
           </Grid>
 
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              1
-            </Button>
+            <CalculatorButton symbol='1' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
+
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              2
-            </Button>
+            <CalculatorButton symbol='2' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
+
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              3
-            </Button>
+            <CalculatorButton symbol='3' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
+
           <Grid xs={3}>
             <Button variant='text' color='info' size='small'>
               <IsoIcon />
@@ -124,16 +156,15 @@ const CalculatorInterface = () => {
               %
             </Button>
           </Grid>
+
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              0
-            </Button>
+            <CalculatorButton symbol='0' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
+
           <Grid xs={3}>
-            <Button variant='text' size='small'>
-              .
-            </Button>
+            <CalculatorButton symbol='.' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
+
           <Grid xs={3}>
             <Button variant='contained' color='info' size='small'>
               <BoltIcon />
