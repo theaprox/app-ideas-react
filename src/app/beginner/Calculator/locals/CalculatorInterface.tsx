@@ -26,8 +26,9 @@ export const ACTIONS = {
 
 //@ts-ignore
 function reducer(state, { type, value }) {
+
   const natural: RegExp = /^[1-9]+$/g; // define natural single digit nmumbers
-  if (state.input === '') state.input = '0'; // fix empty input string pre-swithc
+  if (state.input === '') state.input = '0'; // fix empty input string pre-switch
   if (isNaN(Number(state.input)) || isNaN(Number(state.memory))) {
     return {
       ...state,
@@ -36,7 +37,9 @@ function reducer(state, { type, value }) {
       operation: '',
     }
   }
+
   switch (type) {
+
     case ACTIONS.CLEAR:
       return { ...state, input: '0', memory: '', operation: '' }; // handle clear (AC)
 
@@ -53,7 +56,6 @@ function reducer(state, { type, value }) {
       if ((state.input.length <= 2 && !state.memory && state.input.includes('-')) || (state.input.length <= 1 && !state.memory)) {
         return { ...state, input: '0' };
       }
-
       return { ...state, input: state.input.slice(0, -1) };
 
     case ACTIONS.KEYPAD:
@@ -101,7 +103,6 @@ function reducer(state, { type, value }) {
           input: '0',
         }
       }
-
       if (state.memory && state.operation && state.input === '0') {
         return {
           ...state,
@@ -163,6 +164,21 @@ function calculate({input, memory, operation}) {
   return result.toString()
 }
 
+const INTEGER_FORMATTING = new Intl.NumberFormat('en-us', {
+  maximumFractionDigits: 0,
+})
+
+//@ts-ignore
+function prettifyNumerator(numbas){
+  if (numbas == null || numbas == '') return
+  const [integers, decimals] = numbas.split('.')
+  if(decimals == null)
+    return INTEGER_FORMATTING.format(integers).replace(/,/g, ' ')
+  return `${INTEGER_FORMATTING.format(integers).replace(/,/g, ' ')}.${decimals}`
+}
+
+
+// CLASSES FOR STYLING STUFF
 const CalculatorInterface = () => {
   const btnBoxClass = {
     '& button': {
@@ -185,7 +201,7 @@ const CalculatorInterface = () => {
 
   return (
     <>
-      <CalculatorDisplay input={input} memory={memory} operation={operation} />
+      <CalculatorDisplay input={prettifyNumerator(input)} memory={prettifyNumerator(memory)} operation={operation} />
       <Box sx={btnBoxClass}>
         <Grid container spacing={0}>
           <Grid xs={3}>
