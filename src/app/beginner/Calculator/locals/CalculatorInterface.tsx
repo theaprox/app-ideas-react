@@ -21,6 +21,7 @@ export const ACTIONS = {
   KEYPAD: 'KEYPAD',
   OPERATION: 'OPERATION',
   INVERT: 'INVERT',
+  PERCENT: 'PERCENT',
 }
 
 //@ts-ignore
@@ -29,12 +30,10 @@ function reducer(state, {type, value}){
   switch(type){
 
     case ACTIONS.CLEAR:
-      return {
-        input: '0'
-      }
+      return { ...state, input: '0', memory: '' } // handle clear (AC)
 
     case ACTIONS.BACKSPACE:
-      if(state.input.length <= 1) { // reset to 0 after last digit clear
+      if(state.input.length <= 1) { // reset to 0 after last digit is erased
         return { ...state, input: '0' }
       }
       return { ...state, input: state.input.slice(0, -1) }
@@ -90,14 +89,10 @@ const CalculatorInterface = () => {
             <CalculatorButton action={ACTIONS.CLEAR} icon={<LayersClearIcon />} variant='contained' color='secondary' dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              <CloseIcon />
-            </Button>
+            <CalculatorButton symbol='x' action={ACTIONS.OPERATION} icon={<CloseIcon />} color='info' dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              /
-            </Button>
+            <CalculatorButton symbol='/' action={ACTIONS.OPERATION} color='info' dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
             <CalculatorButton action={ACTIONS.BACKSPACE} icon={<BackspaceIcon />} color='info' dispatch={dispatch} />
@@ -113,9 +108,7 @@ const CalculatorInterface = () => {
             <CalculatorButton symbol='9' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              <RemoveIcon />
-            </Button>
+            <CalculatorButton symbol='-' action={ACTIONS.OPERATION} icon={<RemoveIcon />} color='info' dispatch={dispatch} />
           </Grid>
 
           <Grid xs={3}>
@@ -128,9 +121,7 @@ const CalculatorInterface = () => {
             <CalculatorButton symbol='6' action={ACTIONS.KEYPAD} dispatch={dispatch} />
           </Grid>
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              <AddIcon />
-            </Button>
+            <CalculatorButton symbol='+' action={ACTIONS.OPERATION} icon={<AddIcon />} color='info' dispatch={dispatch} />
           </Grid>
 
           <Grid xs={3}>
@@ -146,15 +137,11 @@ const CalculatorInterface = () => {
           </Grid>
 
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              <IsoIcon />
-            </Button>
+            <CalculatorButton action={ACTIONS.INVERT} icon={<IsoIcon />} color='info' dispatch={dispatch} />
           </Grid>
 
           <Grid xs={3}>
-            <Button variant='text' color='info' size='small'>
-              %
-            </Button>
+            <CalculatorButton action={ACTIONS.PERCENT} symbol='%' color='info' dispatch={dispatch} />
           </Grid>
 
           <Grid xs={3}>
@@ -166,9 +153,7 @@ const CalculatorInterface = () => {
           </Grid>
 
           <Grid xs={3}>
-            <Button variant='contained' color='info' size='small'>
-              <BoltIcon />
-            </Button>
+            <CalculatorButton action={ACTIONS.EQUAL} icon={<BoltIcon />} color='info' variant='contained' dispatch={dispatch} />
           </Grid>
         </Grid>
       </Box>

@@ -19,6 +19,8 @@ type AllCalculatorsButtonProps = CalculatorButtonProps & ExclusiveCalculatorButt
 const CalculatorButton: React.FC<AllCalculatorsButtonProps> = ({
   dispatch, action, symbol, variant = 'text', color = 'primary', size = 'small', text=symbol, icon, ...rest
 }) => {
+  // prevent text/symbol from displaying if icon is used
+  if(icon) text= '';
   return (
     <>
       <Button
