@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ContentHolder from '@/app/components/ContentHolder';
 import PaperWrapper from '@/app/components/PaperWrapper';
 import SimpleTitle from '@/app/components/SimpleTitle';
@@ -18,26 +18,44 @@ const appsubtitle =
 const apptitleicon = <EuroSymbolIcon />;
 
 const CashMoneys = () => {
+  const [amount, setAmount] = useState('0')
+
+  //@ts-ignore
+  const handleInputChange = (event) => {
+    
+  }
   return (
     <ContentHolder>
       <SimpleTitle title={appname} icon={apptitleicon} subtitle={appsubtitle} />
       <PaperWrapper>
-        <Box component='div' sx={{gap: 2}}>
-          <FormControl fullWidth variant='filled' color='success' focused={true}>
+          <Box
+            component='div'
+            sx={{ display: 'flex', flexDirection: 'column', gap: 0, p: 1, border: '1px dashed', borderColor: 'primary.dark', typography: 'h4', textAlign: 'center', }}>
+              <Box component='span' sx={{ fontSize: '0.5em', color: 'primary.dark', }}> Euro</Box>
+              {amount}
+          </Box>
+        <Box component='div'>
+          <FormControl
+            fullWidth
+            variant='filled'
+            color='success'
+            focused={true}>
             <InputLabel htmlFor='filled-adornment-amount'>Amount</InputLabel>
             <FilledInput
               id='filled-adornment-amount'
+              value={amount}
+              onChange={handleInputChange}
               startAdornment={
                 <InputAdornment position='start'>€</InputAdornment>
               }
+              inputProps={{ inputMode: 'decimal' }}
             />
           </FormControl>
         </Box>
         <Box component='div'>
-          <Button variant="contained" startIcon={<PaymentsIcon />} fullWidth>Convert</Button>
-        </Box>
-        <Box>
-          Bolls n stuff...
+          <Button variant='contained' startIcon={<PaymentsIcon />} fullWidth>
+            Convert
+          </Button>
         </Box>
       </PaperWrapper>
     </ContentHolder>
