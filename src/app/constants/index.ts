@@ -43,6 +43,12 @@ interface SidebarItems {
                 level: '2',
                 label: 'Calculator',
                 path: '/beginner/Calculator',
+            },
+            {
+                key: 'cashmoneys',
+                level: '2',
+                label: 'Convert Cash',
+                path: '/beginner/CashMoney',
             }
         ]
     },
