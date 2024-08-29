@@ -28,7 +28,7 @@ const CalculatorDisplay: React.FC<DisplayProps> = ({ input, memory, operation })
     px: 2,
     lineHeight: 'inherit',
     height: '1.618em',
-    overflowX: 'scroll',
+    overflowX: 'hidden',
     overflowY: 'hidden',
     '& span.infinite': {
       display: 'flex',
